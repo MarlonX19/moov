@@ -5,16 +5,17 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 const App = () => {
   return (
-    <>
+    <NavigationContainer>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
-          <Text>Hello world</Text>
+        <Text> text goes here </Text>
       </SafeAreaView>
-    </>
+    </NavigationContainer>
   );
 };
 
