@@ -9,7 +9,6 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
 import Home from './screens/Home';
@@ -27,7 +26,7 @@ const App = () => {
       <Drawer.Navigator
         drawerContent={DrawerContent}
         initialRouteName="Home"
-        overlayColor='transparent'
+        overlayColor='rgba(0,0,0,0.6)'
         drawerStyle={{
           backgroundColor: '#fff',
           width: 280,
