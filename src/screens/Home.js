@@ -3,6 +3,7 @@ import { View, Text, Button } from 'react-native';
 import MapView from 'react-native-maps';
 
 import Header from '../components/Header';
+import SearchBox from '../components/SearchBox';
 
 export default function Home(props) {
     return (
@@ -17,6 +18,7 @@ export default function Home(props) {
                     longitudeDelta: 0.0421,
                 }}
             />
+            <SearchBox cityName={'miami'} />
         </View>
     );
 }
