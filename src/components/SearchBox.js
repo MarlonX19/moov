@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
+import { Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 
 const SearchBox = (props) => {
     const [isSearchFocused, setIsSearchFocused] = useState(false);
+    const { onLocationSelected } = props;
+
+
+    async function handleLocationSelected (data, { geometry }) {
+        console.log('geometry')
+        const { location: { lat: latitude, lng: longitude } } = geometry;
+        setDestination({ 'latitude': latitude, 'longitude': longitude, 'title': data.structured_formatting.main_text })
+    }
+
+    function sayName(res){
+        console.log(res)
+    }
  
          return  <GooglePlacesAutocomplete
                  placeholder={'Onde precisa entregar algo?'}
                  placeholderTextColor="#333"
-                 onPress={(res) => props.handleLocationSearch(res)}
+                 fetchDetails={true}
+                 onPress={onLocationSelected}
                  query={{
-                     key: 'AIzaSyBhAwIwcJLk10RVN1eQIWGiESlcZZnFjcE',
+                     key: 'AIzaSyBxrHIlkzVvQLoQuRHBI-46AMuJm5GyffA',
                      language: 'pt'
                  }}
                  textInputProps={{
@@ -19,7 +33,6 @@ const SearchBox = (props) => {
                      autoCapitalize: 'none',
                      autoCorrect: false
                  }}
-                 fetchDetails
                  enablePoweredByContainer={false}
                  listViewDisplayed={isSearchFocused}
                  styles={{
@@ -81,7 +94,9 @@ const SearchBox = (props) => {
                      }
                    
                  }}
-            />
+            >
+                <Text style={{ position: 'relative', marginTop: -50}}>Ola mundo</Text>
+            </GooglePlacesAutocomplete>
      
  }
  
