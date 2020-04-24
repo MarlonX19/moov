@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
 
-export default function SignIn() {
+export default function SignIn(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,6 +13,7 @@ export default function SignIn() {
     <View style={styles.container}>
       <View style={styles.topView}>
         <Text style={styles.topText}>Entrar</Text>
+        <Text style={[styles.topText, { fontSize: 14, fontWeight: 'normal' }]}>Que bom que está aqui!</Text>
       </View>
       <View style={styles.inputsView}>
         <TextInput
@@ -32,7 +34,9 @@ export default function SignIn() {
         />
       </View>
       <View style={styles.forgotPass}>
-        <Text style={styles.forgotPassText}>Esqueceu senha?</Text>
+        <TouchableOpacity onPress={() => props.navigation.navigate('ForgotPass')}>
+          <Text style={styles.forgotPassText}>Esqueceu senha?</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.btnView}>
         <TouchableOpacity
@@ -43,7 +47,9 @@ export default function SignIn() {
         </TouchableOpacity>
       </View>
       <View style={styles.signUpView}>
-        <Text style={styles.signUpText}>Não tem conta? <Text style={styles.signUpText2}>Criar</Text></Text>
+        <TouchableOpacity onPress={() => false}>
+          <Text style={styles.signUpText}>Não tem conta? <Text style={styles.signUpText2}>Criar</Text></Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

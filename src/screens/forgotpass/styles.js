@@ -24,17 +24,6 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
 
-  forgotPass: {
-    height: 70,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    padding: 20
-  },
-
-  forgotPassText: {
-    color: 'grey'
-  },
-
   input: {
     paddingLeft: 20,
     borderBottomWidth: 0.5,
@@ -66,19 +55,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
 
-  signUpView: {
-    height: 50,
-    padding: 5,
-    justifyContent: 'center',
-    alignItems: 'center'
+  forgotPass: {
+    height: 80,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: 10
   },
 
-  signUpText: {
-    color: '#999'
+  forgotPassText: {
+    color: 'grey'
   },
-  signUpText2: {
-    color: 'green'
-  }
 })
 
 export default styles;

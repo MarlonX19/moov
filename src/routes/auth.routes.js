@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import SignIn from '../screens/signin';
-import SignUp from '../screens/signup';
+import ForgotPass from '../screens/forgotpass';
 
 import DrawerContent from '../components/DrawerContent';
 
@@ -26,7 +26,7 @@ const AuthRoutes = () => (
         }}
       >
         <AuthStack.Screen name="SignIn" component={SignIn} />
-        <AuthStack.Screen name="SignUp" component={SignUp} />
+        <AuthStack.Screen name="ForgotPass" component={ForgotPass} />
       </AuthStack.Navigator>
 )
 
