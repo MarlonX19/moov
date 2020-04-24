@@ -4,11 +4,11 @@ import MapView, { Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import MapViewDirections from 'react-native-maps-directions';
 
-import finishMarker from '../assets/finish.png'
-import startMarker from '../assets/start.png'
+import finishMarker from '../../assets/finish.png'
+import startMarker from '../../assets/start.png'
 
-import Header from '../components/Header';
-import SearchBox from '../components/SearchBox';
+import Header from '../../components/Header';
+import SearchBox from '../../components/SearchBox';
 
 export default function Home(props) {
     const [location, setLocation] = useState({});

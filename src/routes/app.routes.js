@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import Profile from '../screens/Profile';
+import Dashboard from '../screens/dashboard';
 
 import DrawerContent from '../components/DrawerContent';
 
@@ -23,7 +23,7 @@ const AppRoutes = () => (
       itemStyle: { marginVertical: 10 },
     }}
   >
-    <AppStack.Screen name="Profile" component={Profile} />
+    <AppStack.Screen name="Dashboard" component={Dashboard} />
   </AppStack.Navigator>
 )
 

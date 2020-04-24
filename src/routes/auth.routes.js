@@ -2,7 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import Home from '../screens/Home';
+import SignIn from '../screens/signin';
+import SignUp from '../screens/signup';
 
 import DrawerContent from '../components/DrawerContent';
 
@@ -24,7 +25,8 @@ const AuthRoutes = () => (
           itemStyle: { marginVertical: 10 },
         }}
       >
-        <AuthStack.Screen name="Home" component={Home} />
+        <AuthStack.Screen name="SignIn" component={SignIn} />
+        <AuthStack.Screen name="SignUp" component={SignUp} />
       </AuthStack.Navigator>
 )
 
