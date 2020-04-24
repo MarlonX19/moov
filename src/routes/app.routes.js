@@ -12,7 +12,7 @@ const AppStack = createDrawerNavigator();
 const AppRoutes = () => (
   <AppStack.Navigator
     drawerContent={DrawerContent}
-    initialRouteName="Home"
+    initialRouteName="Dashboard"
     overlayColor='rgba(0,0,0,0.6)'
     drawerStyle={{
       backgroundColor: '#fff',

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Button, PermissionsAndroid, Modal } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
@@ -7,12 +7,20 @@ import MapViewDirections from 'react-native-maps-directions';
 import finishMarker from '../../assets/finish.png'
 import startMarker from '../../assets/start.png'
 
+import AuthContext from '../../contexts/auth';
+
 import Header from '../../components/Header';
 import SearchBox from '../../components/SearchBox';
 
 export default function Home(props) {
     const [location, setLocation] = useState({});
     const [destination, setDestination] = useState({})
+    const { signOut } = useContext(AuthContext);
+
+
+    function handleSignOut() {
+        signOut();
+    }
 
     async function getLocation() {
         try {
@@ -64,7 +72,7 @@ export default function Home(props) {
 
     return (
         <View style={{ flex: 1, backgroundColor: "transparent" }}>
-            <Header navigation={props.navigation} />
+            <Header navigation={props.navigation} handleFun={() => handleSignOut()} />
             <SearchBox direction='from' onLocation={handleLocationSelected} />
             <SearchBox direction='to' onLocation={handleDestinationSelected} />
             <MapView

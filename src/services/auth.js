@@ -8,6 +8,6 @@ export function Signin(){
           email: 'marlon.bennet@gmail.com'
         }
       })
-    }, 2000);
+    }, 1000);
   })
 }

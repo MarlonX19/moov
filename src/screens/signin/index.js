@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StatusBar } from 'react-native';
+
+import AuthContext from '../../contexts/auth';
 
 import styles from './styles';
 
 export default function SignIn(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { signed, signIn } = useContext(AuthContext);
+
+
+  function handleLogin(){
+    signIn();
+  }
 
 
   return (
@@ -40,7 +48,7 @@ export default function SignIn(props) {
       </View>
       <View style={styles.btnView}>
         <TouchableOpacity
-          onPress={() => false}
+          onPress={() => handleLogin()}
           style={styles.btn}
         >
           <Text style={styles.btnText}>ENTRAR</Text>

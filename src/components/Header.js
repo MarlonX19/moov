@@ -3,10 +3,16 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
+import AuthContext from '../contexts/auth';
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
 export default function Header(props) {
+    const { handleFun } = props;
+
+    
     return (
         <View style={styles.container}>
             <TouchableOpacity
@@ -15,7 +21,7 @@ export default function Header(props) {
                 <Icon style={styles.togglerIcon} name="navicon" size={22} color="#525151" />
             </TouchableOpacity>
             <TouchableOpacity
-                onPress={() => props.navigation.toggleDrawer()}
+                onPress={() => handleFun()}
             >
                 <Icon style={styles.questionicon} name="question" size={22} color="#525151" />
             </TouchableOpacity>

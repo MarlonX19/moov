@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
-export default function DrawerContent() {
+
+export default function DrawerContent(props) {
+
     return (
         <View style={styles.drawerContent}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 10, paddingVertical: 20, borderBottomWidth: 0.5, borderBottomColor: '#ddd' }}>
@@ -60,6 +62,11 @@ export default function DrawerContent() {
                     <Text style={styles.menuOptionText}>Configurações</Text>
                 </View>
             </View>
+            <View>
+                <TouchableOpacity onPress={() => false}>
+                    <Text style={styles.signOutText}>Sair</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -82,6 +89,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 17,
         color: '#525151',
+        marginVertical: 5
+    },
+
+    signOutText: {
+        marginLeft: 10,
+        fontFamily: 'Roboto',
+        fontSize: 17,
+        color: 'red',
         marginVertical: 5
     }
 });

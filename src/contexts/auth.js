@@ -42,8 +42,12 @@ export const AuthProvider = ({ children }) => {
     })
   }
 
+  function sayHi() {
+    alert('ola')
+  }
+
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading }} >
+    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading, sayHi }} >
       {children}
     </AuthContext.Provider>
   )
