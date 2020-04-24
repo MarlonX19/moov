@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, PermissionsAndroid } from 'react-native';
+import { View, Text, Button, PermissionsAndroid, Modal } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import MapViewDirections from 'react-native-maps-directions';
 
-import markerImage from '../assets/red.png'
+import finishMarker from '../assets/finish.png'
+import startMarker from '../assets/start.png'
 
 import Header from '../components/Header';
 import SearchBox from '../components/SearchBox';
@@ -48,7 +49,11 @@ export default function Home(props) {
 
     const handleLocationSelected = async (data, { geometry }) => {
         const { location } = geometry;
-        console.log(location)
+        setLocation({ 'latitude': location.lat, 'longitude': location.lng })
+    }
+
+    const handleDestinationSelected = async (data, { geometry }) => {
+        const { location } = geometry;
         setDestination({ 'latitude': location.lat, 'longitude': location.lng })
     }
 
@@ -60,6 +65,8 @@ export default function Home(props) {
     return (
         <View style={{ flex: 1, backgroundColor: "transparent" }}>
             <Header navigation={props.navigation} />
+            <SearchBox direction='from' onLocation={handleLocationSelected} />
+            <SearchBox direction='to' onLocation={handleDestinationSelected} />
             <MapView
                 style={{ flex: 1 }}
                 initialRegion={{
@@ -70,6 +77,10 @@ export default function Home(props) {
                 }}
                 showsUserLocation
                 loadingEnabled
+                showsMyLocationButton={false}
+                showsCompass={false}
+                ref={el => map = el}
+
             >
                 {destination.latitude ?
                     <>
@@ -78,7 +89,9 @@ export default function Home(props) {
                             destination={destination}
                             apikey='AIzaSyBxrHIlkzVvQLoQuRHBI-46AMuJm5GyffA'
                             strokeWidth={3}
-                            strokeColor='black'
+                            strokeColor='purple'
+                            onReady={(result) =>
+                                map.fitToCoordinates(result.coordinates)}
                         />
                         <Marker
                             title='Coleta será aqui'
@@ -86,25 +99,19 @@ export default function Home(props) {
                             onPress={e => console.log(e.nativeEvent)}
                             draggable
                             coordinate={location}
+                            image={startMarker}
                         >
-                            <View style={{ backgroundColor: "#fff", padding: 10, marginBottom: 5}}>
-                                <Text style={{ fontSize: 13, color: '#525151' }}>Coleta será aqui</Text>
-                            </View>
                         </Marker>
                         <Marker
                             title='Entrega será aqui'
                             isPreselected={true}
                             coordinate={destination}
-                            image={markerImage}
+                            image={finishMarker}
                         >
-                            <View style={{ backgroundColor: "#fff", padding: 10, marginBottom: 5 }}>
-                                <Text style={{ fontSize: 13, color: '#525151' }}>Entrega será aqui</Text>
-                            </View>
                         </Marker>
                     </>
                     : <View></View>}
             </MapView>
-            <SearchBox onLocationSelected={handleLocationSelected} />
         </View >
     );
 }

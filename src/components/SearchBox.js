@@ -5,24 +5,14 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 
 const SearchBox = (props) => {
     const [isSearchFocused, setIsSearchFocused] = useState(false);
-    const { onLocationSelected } = props;
+    const { onLocation } = props;
 
-
-    async function handleLocationSelected (data, { geometry }) {
-        console.log('geometry')
-        const { location: { lat: latitude, lng: longitude } } = geometry;
-        setDestination({ 'latitude': latitude, 'longitude': longitude, 'title': data.structured_formatting.main_text })
-    }
-
-    function sayName(res){
-        console.log(res)
-    }
  
          return  <GooglePlacesAutocomplete
-                 placeholder={'Onde precisa entregar algo?'}
+                 placeholder={props.direction == 'from' ? 'De onde?' : 'Para onde?'}
                  placeholderTextColor="#333"
                  fetchDetails={true}
-                 onPress={onLocationSelected}
+                 onPress={onLocation}
                  query={{
                      key: 'AIzaSyBxrHIlkzVvQLoQuRHBI-46AMuJm5GyffA',
                      language: 'pt'
@@ -38,20 +28,20 @@ const SearchBox = (props) => {
                  styles={{
                      container: {
                          position: 'absolute',
-                         top: Platform.select({ ios: 60, android: 70 }),
+                         top: Platform.select({ ios: props.direction == 'from' ? 60 : 120, android: props.direction == 'from' ? 70 : 120 }),
                          width: '100%',
-                         zIndex: 6,
+                         zIndex:  props.direction == 'from' ? 6 : 5
                      },
                      textInputContainer: {
                          flex: 1,
                          backgroundColor: 'transparent',
-                         height: 54,
+                         height: 50,
                          marginHorizontal: 20,
                          borderTopWidth: 0,
                          borderBottomWidth: 0,
                      },
                      textInput: {
-                         height: 50,
+                         height: 45,
                          margin: 0,
                          borderRadius: 0,
                          paddingTop: 0,
@@ -67,15 +57,15 @@ const SearchBox = (props) => {
                          shadowOpacity: 0.1,
                          shadowOffset: {x: 0, y: 0},
                          shadowRadius: 15,
-                         borderRadius: 25,
+                         borderRadius: 4,
                          borderWidth: 0.6,
                          borderColor: "#ddd",
-                         fontSize: 18
+                         fontSize: 16
                      },
                      listView: {
                          borderWidth: 0.6,
                          borderColor: "#ddd",
-                         borderRadius: 25,
+                         borderRadius: 4,
                          backgroundColor: "#EEF2EB",
                          marginHorizontal: 20,
                          elevation: 5,
@@ -83,7 +73,7 @@ const SearchBox = (props) => {
                          shadowOpacity: 0.1,
                          shadowOffset: {x: 0, y: 0},
                          shadowRadius: 10,
-                         marginTop: 0,
+                         marginTop: 0
                      },
                      description: {
                          fontSize: 14,
@@ -95,7 +85,6 @@ const SearchBox = (props) => {
                    
                  }}
             >
-                <Text style={{ position: 'relative', marginTop: -50}}>Ola mundo</Text>
             </GooglePlacesAutocomplete>
      
  }
