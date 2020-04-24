@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Text, TouchableOpacity, TextInput, StatusBar } from 'react-native';
 
 import styles from './styles';
 
@@ -11,6 +10,7 @@ export default function SignIn(props) {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor='#FA960F' />
       <View style={styles.topView}>
         <Text style={styles.topText}>Entrar</Text>
         <Text style={[styles.topText, { fontSize: 14, fontWeight: 'normal' }]}>Que bom que está aqui!</Text>

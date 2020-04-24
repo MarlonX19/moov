@@ -21,7 +21,11 @@ const styles = StyleSheet.create({
 
   inputsView: {
     backgroundColor: '#fff',
-    elevation: 1,
+    elevation: 0.5,
+    borderRadius: 30,
+    marginVertical: 10,
+    marginHorizontal: 50,
+
   },
 
   input: {
@@ -29,6 +33,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: '#ccc',
     paddingBottom: 10,
+    borderRadius: 30,
     paddingTop: 10,
   },
 
@@ -56,16 +61,23 @@ const styles = StyleSheet.create({
   },
 
   forgotPass: {
-    height: 80,
+    height: 40,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: 10
+    justifyContent: 'center',
   },
 
   forgotPassText: {
     color: 'grey'
   },
+
+  nextButtonTextStyle: {
+    color: 'green',
+  },
+
+  previousButtonTextStyle: {
+    color: 'red'
+  }
 })
 
 export default styles;
