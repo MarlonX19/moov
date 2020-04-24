@@ -14,8 +14,8 @@ export default function ForgotPass() {
         <Text style={styles.topText}>Esqueceu a senha?</Text>
         <Text style={[styles.topText, { fontSize: 14, fontWeight: 'normal' }]}>relaxa, a gente te ajuda!</Text>
       </View>
-      <View style={{height: 400 }}>
-        <ProgressSteps>
+      <View style={{ height: 400 }}>
+        <ProgressSteps isComplete={false} >
           <ProgressStep label="Informar email" nextBtnText='Próximo' nextBtnTextStyle={styles.nextButtonTextStyle} nextBtnStyle={styles.nextButtonStyle} >
             <View>
               <View style={styles.inputsView}>
@@ -47,8 +47,24 @@ export default function ForgotPass() {
             previousBtnTextStyle={styles.previousButtonTextStyle}
             nextBtnText='Próximo'
             nextBtnTextStyle={styles.nextButtonTextStyle}>
-            <View>
-              <Text>This is the content within step 2!</Text>
+            <View style={styles.inputsView}>
+              <TextInput
+                style={[styles.input, { paddingLeft: 0 }]}
+                placeholder='_ _ _ _'
+                textAlign={'center'}
+                textContentType='emailAddress'
+                placeholderTextColor='#ddd'
+                onChangeText={text => setEmail(text)}
+                value={email}
+              />
+            </View>
+            <View style={styles.btnView}>
+              <TouchableOpacity
+                onPress={() => false}
+                style={styles.btn}
+              >
+                <Text style={styles.btnText}>VERIFICAR CÓDIGO</Text>
+              </TouchableOpacity>
             </View>
           </ProgressStep>
           <ProgressStep
@@ -57,8 +73,25 @@ export default function ForgotPass() {
             previousBtnTextStyle={styles.previousButtonTextStyle}
             nextBtnTextStyle={styles.nextButtonTextStyle}
             finishBtnText='Concluir'>
-            <View>
-              <Text>This is the content within step 3!</Text>
+            <View style={styles.inputsView}>
+              <TextInput
+                style={[styles.input, { paddingLeft: 0 }]}
+                placeholder='nova senha'
+                textAlign={'center'}
+                secureTextEntry
+                placeholderTextColor='#ddd'
+                onChangeText={text => setEmail(text)}
+                value={email}
+              />
+              <TextInput
+                style={[styles.input, { paddingLeft: 0 }]}
+                placeholder='Confirmar nova senha'
+                textAlign={'center'}
+                secureTextEntry
+                placeholderTextColor='#ddd'
+                onChangeText={text => setEmail(text)}
+                value={email}
+              />
             </View>
           </ProgressStep>
         </ProgressSteps>
