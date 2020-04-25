@@ -72,7 +72,7 @@ export default function Home(props) {
 
     return (
         <View style={{ flex: 1, backgroundColor: "transparent" }}>
-            <Header navigation={props.navigation} handleFun={() => handleSignOut()} />
+            <Header head='header' navigation={props.navigation} handleFun={() => handleSignOut()} />
             <SearchBox direction='from' onLocation={handleLocationSelected} />
             <SearchBox direction='to' onLocation={handleDestinationSelected} />
             <MapView

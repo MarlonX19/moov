@@ -62,11 +62,6 @@ export default function DrawerContent(props) {
                     <Text style={styles.menuOptionText}>Configurações</Text>
                 </View>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => false}>
-                    <Text style={styles.signOutText}>Sair</Text>
-                </TouchableOpacity>
-            </View>
         </View>
     );
 }

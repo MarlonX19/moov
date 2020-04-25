@@ -16,7 +16,11 @@ export default function ForgotPass() {
       </View>
       <View style={{ height: 400 }}>
         <ProgressSteps isComplete={false} >
-          <ProgressStep label="Informar email" nextBtnText='Próximo' nextBtnTextStyle={styles.nextButtonTextStyle} nextBtnStyle={styles.nextButtonStyle} >
+          <ProgressStep
+            label="Informar email"
+            nextBtnText='Próximo'
+            nextBtnTextStyle={styles.nextBtnTextStyle}
+          >
             <View>
               <View style={styles.inputsView}>
                 <TextInput
@@ -44,9 +48,11 @@ export default function ForgotPass() {
           <ProgressStep
             label="Digite o código"
             previousBtnText='Anterior'
-            previousBtnTextStyle={styles.previousButtonTextStyle}
+            previousBtnTextStyle={styles.previousBtnTextStyle}
             nextBtnText='Próximo'
-            nextBtnTextStyle={styles.nextButtonTextStyle}>
+            nextBtnTextStyle={styles.nextBtnTextStyle}
+            nextBtnStyle={styles.nextBtnStyle}
+          >
             <View style={styles.inputsView}>
               <TextInput
                 style={[styles.input, { paddingLeft: 0 }]}
@@ -70,8 +76,8 @@ export default function ForgotPass() {
           <ProgressStep
             label="Nova senha"
             previousBtnText='Anterior'
-            previousBtnTextStyle={styles.previousButtonTextStyle}
-            nextBtnTextStyle={styles.nextButtonTextStyle}
+            previousBtnTextStyle={styles.previousBtnTextStyle}
+            nextBtnTextStyle={styles.nextBtnTextStyle}
             finishBtnText='Concluir'>
             <View style={styles.inputsView}>
               <TextInput

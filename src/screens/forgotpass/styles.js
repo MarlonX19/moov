@@ -71,13 +71,16 @@ const styles = StyleSheet.create({
     color: 'grey'
   },
 
-  nextButtonTextStyle: {
+  nextBtnTextStyle: {
     color: 'green',
+    fontSize: 16,
   },
 
-  previousButtonTextStyle: {
-    color: 'red'
-  }
+  previousBtnTextStyle: {
+    color: 'red',
+    fontSize: 16,
+  },
+
 })
 
 export default styles;

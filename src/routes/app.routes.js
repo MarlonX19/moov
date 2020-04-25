@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Dashboard from '../screens/dashboard';
+import Test from '../screens/test';
 
 import DrawerContent from '../components/DrawerContent';
 
@@ -24,6 +25,7 @@ const AppRoutes = () => (
     }}
   >
     <AppStack.Screen name="Dashboard" component={Dashboard} />
+    <AppStack.Screen name="Test" component={Test} />
   </AppStack.Navigator>
 )
 
