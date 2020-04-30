@@ -29,8 +29,8 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   async function signIn() {
-    const response = await auth.Signin()
-    setUser(response.user)
+    const response = await auth.Signin();
+    setUser(response.user);
 
     await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.user));
     await AsyncStorage.setItem('@RNAuth:token', response.token);
