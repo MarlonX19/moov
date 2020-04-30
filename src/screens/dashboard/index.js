@@ -14,6 +14,8 @@ import AuthContext from '../../contexts/auth';
 import Header from '../../components/Header';
 import SearchBox from '../../components/SearchBox';
 
+import styles from './styles';
+
 export default function Home(props) {
     const [location, setLocation] = useState({});
     const [destination, setDestination] = useState({});
@@ -94,25 +96,14 @@ export default function Home(props) {
 
 
     return (
-        <View style={{ flex: 1, backgroundColor: "transparent" }}>
+        <View style={styles.container}>
             <Header head='header' navigation={props.navigation} handleFun={() => handleSignOut()} />
             <SearchBox direction='from' onLocation={handleLocationSelected} />
             <SearchBox direction='to' onLocation={handleDestinationSelected} />
-            <View style={{
-                position: 'absolute',
-                top: 180,
-                width: '20%',
-                height: 50,
-                alignSelf: 'center',
-                backgroundColor: '#fff',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 4,
-                zIndex: 4,
-            }}>
-                <Text style={{ fontSize: 11, color:"#999"}}>Distância</Text>
-                <Text style={{ fontSize: 12, color:"#333"}}>{parseInt(distanceBetween)} km</Text>
-            </View>
+            {distanceBetween ? <View style={styles.distanceView}>
+                <Text style={styles.distanceTxt}>Distância</Text>
+                <Text style={styles.distanceValue}>{parseInt(distanceBetween)} km</Text>
+            </View> : <View></View>}
             <MapView
                 style={{ flex: 1 }}
                 initialRegion={{
@@ -136,6 +127,7 @@ export default function Home(props) {
                             apikey='AIzaSyBxrHIlkzVvQLoQuRHBI-46AMuJm5GyffA'
                             strokeWidth={3}
                             strokeColor='purple'
+                            mode='DRIVING'
                             onReady={(result) =>
                                 map.fitToCoordinates(result.coordinates)}
                         />

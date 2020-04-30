@@ -66,7 +66,7 @@ const SearchBox = (props) => {
                          borderWidth: 0.6,
                          borderColor: "#ddd",
                          borderRadius: 4,
-                         backgroundColor: "#EEF2EB",
+                         backgroundColor: "#fcf8f0",
                          marginHorizontal: 20,
                          elevation: 5,
                          shadowColor: "#000",
@@ -76,7 +76,8 @@ const SearchBox = (props) => {
                          marginTop: 0
                      },
                      description: {
-                         fontSize: 14,
+                         fontSize: 15,
+                         color: '#454545'
                      },
                      row: {
                          padding: 10,
