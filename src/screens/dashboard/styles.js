@@ -4,12 +4,10 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
 
   distanceView: {
-    position: 'absolute',
-    top: 180,
     width: '20%',
     height: 50,
     alignSelf: 'center',
@@ -17,17 +15,43 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 4,
-    zIndex: 4,
   },
 
   distanceTxt: {
-    fontSize: 11, 
-    color:"#999"
+    fontSize: 13,
+    color: "#999"
   },
 
   distanceValue: {
-    fontSize: 12, 
-    color:"#333"
+    fontSize: 15,
+    color: "#333"
+  },
+
+  bottomView: {
+    height: 250,
+    backgroundColor: '#fff',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 10,
+    elevation: 15,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { x: 0, y: 0 },
+    shadowRadius: 10,
+  },
+
+  btn: {
+    height: 40,
+    width: 140,
+    backgroundColor: '#FA960F',
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  btnText: {
+    color: '#fff',
+    letterSpacing: 0.5
   }
 })
 

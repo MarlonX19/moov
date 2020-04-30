@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, Button, PermissionsAndroid, Modal } from 'react-native';
+import { View, Text, Button, PermissionsAndroid, Modal, Dimensions, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import MapViewDirections from 'react-native-maps-directions';
 import { getDistance } from 'geolib';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-import finishMarker from '../../assets/finish.png'
-import startMarker from '../../assets/start.png'
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
+
+
+import finishMarker from '../../assets/finish.png';
+import startMarker from '../../assets/start.png';
 
 import AuthContext from '../../contexts/auth';
 
@@ -82,6 +87,12 @@ export default function Home(props) {
         setDistanceBetween((dis / 1000).toString());
     }
 
+    const resetSearch = () => {
+        setLocation({});
+        setDestination({});
+        setDistanceBetween('');
+    }
+
     useEffect(() => {
         getLocation()
 
@@ -98,12 +109,10 @@ export default function Home(props) {
     return (
         <View style={styles.container}>
             <Header head='header' navigation={props.navigation} handleFun={() => handleSignOut()} />
-            <SearchBox direction='from' onLocation={handleLocationSelected} />
-            <SearchBox direction='to' onLocation={handleDestinationSelected} />
-            {distanceBetween ? <View style={styles.distanceView}>
-                <Text style={styles.distanceTxt}>Distância</Text>
-                <Text style={styles.distanceValue}>{parseInt(distanceBetween)} km</Text>
-            </View> : <View></View>}
+            {distanceBetween ? <View></View> : <View>
+                <SearchBox direction='from' onLocation={handleLocationSelected} />
+                <SearchBox direction='to' onLocation={handleDestinationSelected} />
+            </View>}
             <MapView
                 style={{ flex: 1 }}
                 initialRegion={{
@@ -150,6 +159,30 @@ export default function Home(props) {
                     </>
                     : <View></View>}
             </MapView>
+            {distanceBetween ?
+                <View style={styles.bottomView}>
+                    <TouchableOpacity
+                        onPress={() => resetSearch()}
+                        style={{ position: 'absolute', top: 15, left: 15 }}
+                    >
+                        <Icon name="times" size={25} color="#ddd" />
+                    </TouchableOpacity>
+                    <Icon style={styles.togglerIcon} name="truck" size={30} color="#FA960F" />
+                    <View style={styles.distanceView}>
+                        <Text style={styles.distanceTxt}>Distância</Text>
+                        <Text style={styles.distanceValue}>{parseInt(distanceBetween)} km</Text>
+                    </View>
+                    <View style={{ width: '100%', borderBottomWidth: 0.5, borderBottomColor: '#ddd' }}></View>
+                    <View>
+                        <TouchableOpacity
+                            onPress={() => false}
+                            style={styles.btn}
+                        >
+                            <Text style={styles.btnText}>Continuar</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View> : <View></View>}
+
         </View >
     );
 }
