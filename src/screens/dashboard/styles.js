@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 
   distanceValue: {
-    fontSize: 15,
+    fontSize: 17,
     color: "#333"
   },
 

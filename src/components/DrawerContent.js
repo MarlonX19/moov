@@ -17,7 +17,7 @@ export default function DrawerContent(props) {
                         maxStars={5}
                         rating={5}
                         starSize={25}
-                        fullStarColor={'lightgreen'}
+                        fullStarColor={'#FA960F'}
                         selectedStar={(rating) => { }}
                     />
                 </View>
@@ -27,37 +27,37 @@ export default function DrawerContent(props) {
             <View style={{ flex: 3, padding: 10 }}>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25, marginLeft: 2 }}>
-                        <Icon name="user" size={16} color="lightgreen" />
+                        <Icon name="user" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Perfil</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25 }}>
-                        <Icon name="money-bill-alt" size={16} color="lightgreen" />
+                        <Icon name="money-bill-alt" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Pagamentos</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25 }}>
-                        <Icon name="map-marked-alt" size={16} color="lightgreen" />
+                        <Icon name="map-marked-alt" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Acompanhar entregas</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25 }}>
-                        <Icon name="history" size={16} color="lightgreen" />
+                        <Icon name="history" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Histórico</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25 }}>
-                        <Icon name="question-circle" size={18} color="lightgreen" />
+                        <Icon name="question-circle" size={18} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Ajuda</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25, marginLeft: 2 }}>
-                        <Icon name="cog" size={16} color="lightgreen" />
+                        <Icon name="cog" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Configurações</Text>
                 </View>
