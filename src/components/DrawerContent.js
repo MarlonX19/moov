@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
-export default function DrawerContent() {
+
+export default function DrawerContent(props) {
+
     return (
         <View style={styles.drawerContent}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 10, paddingVertical: 20, borderBottomWidth: 0.5, borderBottomColor: '#ddd' }}>
@@ -15,7 +17,7 @@ export default function DrawerContent() {
                         maxStars={5}
                         rating={5}
                         starSize={25}
-                        fullStarColor={'lightgreen'}
+                        fullStarColor={'#FA960F'}
                         selectedStar={(rating) => { }}
                     />
                 </View>
@@ -25,37 +27,37 @@ export default function DrawerContent() {
             <View style={{ flex: 3, padding: 10 }}>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25, marginLeft: 2 }}>
-                        <Icon name="user" size={16} color="lightgreen" />
+                        <Icon name="user" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Perfil</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25 }}>
-                        <Icon name="money-bill-alt" size={16} color="lightgreen" />
+                        <Icon name="money-bill-alt" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Pagamentos</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25 }}>
-                        <Icon name="map-marked-alt" size={16} color="lightgreen" />
+                        <Icon name="map-marked-alt" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Acompanhar entregas</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25 }}>
-                        <Icon name="history" size={16} color="lightgreen" />
+                        <Icon name="history" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Histórico</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25 }}>
-                        <Icon name="question-circle" size={18} color="lightgreen" />
+                        <Icon name="question-circle" size={18} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Ajuda</Text>
                 </View>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25, marginLeft: 2 }}>
-                        <Icon name="cog" size={16} color="lightgreen" />
+                        <Icon name="cog" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Configurações</Text>
                 </View>
@@ -82,6 +84,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 17,
         color: '#525151',
+        marginVertical: 5
+    },
+
+    signOutText: {
+        marginLeft: 10,
+        fontFamily: 'Roboto',
+        fontSize: 17,
+        color: 'red',
         marginVertical: 5
     }
 });
