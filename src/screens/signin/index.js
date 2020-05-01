@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, TouchableOpacity, TextInput, StatusBar } from 'react-native';
 
 import AuthContext from '../../contexts/auth';
@@ -10,6 +11,7 @@ export default function SignIn(props) {
   const [password, setPassword] = useState('');
   const { signed, signIn } = useContext(AuthContext);
 
+  const nav = useNavigation();
 
   function handleLogin(){
     signIn();
@@ -55,7 +57,7 @@ export default function SignIn(props) {
         </TouchableOpacity>
       </View>
       <View style={styles.signUpView}>
-        <TouchableOpacity onPress={() => false}>
+        <TouchableOpacity onPress={() => nav.navigate('SignUp')}>
           <Text style={styles.signUpText}>Não tem conta? <Text style={styles.signUpText2}>Criar</Text></Text>
         </TouchableOpacity>
       </View>
