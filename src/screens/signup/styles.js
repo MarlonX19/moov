@@ -97,6 +97,28 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 16,
   },
+
+  inputViewsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15
+  },
+
+  nameTxtInput: {
+    flex: 1,
+    paddingHorizontal: 5
+  },
+
+  passwordInputView: {
+    flex: 1,
+    paddingHorizontal: 50,
+    paddingVertical: 2
+  },
+
+  passwordText: {
+    paddingHorizontal: 5,
+    backgroundColor: '#fff'
+  }
 })
 
 export default styles;

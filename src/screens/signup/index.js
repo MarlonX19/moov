@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, StatusBar, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StatusBar, ScrollView } from 'react-native';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { TextInput } from 'react-native-paper';
 
@@ -36,8 +36,8 @@ export default function SignUp(props) {
           >
             <View>
               <View style={styles.inputsView}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 15 }}>
-                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                <View style={styles.inputViewsContainer}>
+                  <View style={styles.nameTxtInput}>
                     <TextInput
                       style={{ backgroundColor: '#fff' }}
                       label='Nome'
@@ -45,7 +45,7 @@ export default function SignUp(props) {
                       onChangeText={txt => setName(txt)}
                     />
                   </View>
-                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                  <View style={styles.nameTxtInput}>
                     <TextInput
                       style={{ backgroundColor: '#fff' }}
                       label='Sobrenome'
@@ -56,8 +56,8 @@ export default function SignUp(props) {
                     />
                   </View>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 15 }}>
-                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                <View style={styles.inputViewsContainer}>
+                  <View style={styles.nameTxtInput}>
                     <TextInput
                       style={{ backgroundColor: '#fff' }}
                       label='Telefone'
@@ -67,7 +67,7 @@ export default function SignUp(props) {
                       onChangeText={txt => setPhone(txt)}
                     />
                   </View>
-                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                  <View style={styles.nameTxtInput}>
                     <TextInput
                       style={{ backgroundColor: '#fff' }}
                       label='Email'
@@ -89,7 +89,7 @@ export default function SignUp(props) {
             nextBtnStyle={styles.nextBtnStyle}
           >
             <View style={styles.inputsView}>
-              <View style={{ flex: 1, paddingHorizontal: 50, justifyContent: 'center' }}>
+              <View style={{ flex: 1, paddingHorizontal: 50}}>
                 <TextInput
                   style={{ backgroundColor: '#fff', paddingHorizontal: 5 }}
                   label='CPF'
@@ -108,9 +108,9 @@ export default function SignUp(props) {
             finishBtnText='Concluir'
             onSubmit={() => nav.navigate('Welcome')}>
             <View style={styles.inputsView}>
-              <View style={{ flex: 1, paddingHorizontal: 50, paddingVertical: 5 }}>
+              <View style={styles.passwordInputView}>
                 <TextInput
-                  style={{ paddingHorizontal: 5, backgroundColor: '#fff'  }}
+                  style={styles.passwordText}
                   label='Senha'
                   value={password}
                   autoCapitalize='none'
@@ -119,9 +119,9 @@ export default function SignUp(props) {
                   key={0}
                 />
               </View>
-              <View style={{ flex: 1, paddingHorizontal: 50 }}>
+              <View style={styles.passwordInputView}>
                 <TextInput
-                  style={{ paddingHorizontal: 5, backgroundColor: '#fff' }}
+                  style={styles.passwordText}
                   label='Confirme senha'
                   value={confirmPass}
                   autoCapitalize='none'
