@@ -6,6 +6,9 @@ import styles from './styles';
 
 export default function ForgotPass() {
   const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
 
   return (
@@ -55,13 +58,13 @@ export default function ForgotPass() {
           >
             <View style={styles.inputsView}>
               <TextInput
-                style={[styles.input, { paddingLeft: 0 }]}
+                style={[styles.input, { paddingLeft: 0, fontSize: 18 }]}
                 placeholder='_ _ _ _'
                 textAlign={'center'}
-                textContentType='emailAddress'
+                keyboardType='numeric'
                 placeholderTextColor='#ddd'
-                onChangeText={text => setEmail(text)}
-                value={email}
+                onChangeText={text => setCode(text)}
+                value={code}
               />
             </View>
             <View style={styles.btnView}>
@@ -86,8 +89,9 @@ export default function ForgotPass() {
                 textAlign={'center'}
                 secureTextEntry
                 placeholderTextColor='#ddd'
-                onChangeText={text => setEmail(text)}
-                value={email}
+                onChangeText={text => setPassword(text)}
+                value={password}
+                key={0}
               />
               <TextInput
                 style={[styles.input, { paddingLeft: 0 }]}
@@ -95,10 +99,12 @@ export default function ForgotPass() {
                 textAlign={'center'}
                 secureTextEntry
                 placeholderTextColor='#ddd'
-                onChangeText={text => setEmail(text)}
-                value={email}
+                onChangeText={text => setConfirmPassword(text)}
+                value={confirmPassword}
+                key={1}
               />
             </View>
+            {password != confirmPassword ? <Text style={styles.wrongPass}>Senhas diferentes</Text> : <View />}
           </ProgressStep>
         </ProgressSteps>
       </View>

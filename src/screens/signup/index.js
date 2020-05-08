@@ -113,7 +113,7 @@ export default function SignUp(props) {
                   label='CPF'
                   keyboardType='numeric'
                   value={cpf}
-                  onChangeText={txt => setCpf(txt)}
+                  onChangeText={txt => setCpf(cpfMask(txt))}
                 />
               </View>
             </View>

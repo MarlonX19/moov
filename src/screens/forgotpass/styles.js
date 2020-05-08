@@ -81,6 +81,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
+  wrongPass: {
+    textAlign: 'center',
+    fontSize: 11,
+    color: 'red',
+    marginTop: 15
+  },
+
 })
 
 export default styles;
