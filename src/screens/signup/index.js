@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, StatusBar, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StatusBar, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
+import { TextInput } from 'react-native-paper';
 
 import AuthContext from '../../contexts/auth';
 
@@ -36,43 +37,26 @@ export default function SignUp(props) {
               <View style={styles.inputsView}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                   <TextInput
-                    style={styles.input}
-                    placeholder='Nome'
-                    textContentType='name'
-                    autoCapitalize='words'
-                    placeholderTextColor='#ddd'
-                    onChangeText={text => setName(text)}
+                    label='Nome'
                     value={name}
+                    onChangeText={txt => setName(txt)}
                   />
                   <TextInput
-                    style={styles.input}
-                    placeholder='Sobrenome'
-                    textContentType='familyName'
-                    autoCapitalize='words'
-                    placeholderTextColor='#ddd'
-                    onChangeText={text => setSurname(text)}
+                    label='Sobrenome'
                     value={surname}
+                    onChangeText={txt => setSurname(txt)}
                   />
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                   <TextInput
-                    style={styles.input}
-                    placeholder='Telefone'
-                    textContentType='telephoneNumber'
-                    keyboardType='phone-pad'
-                    autoCapitalize='words'
-                    placeholderTextColor='#ddd'
-                    onChangeText={text => setPhone(text)}
+                    label='Telefone'
                     value={phone}
+                    onChangeText={txt => setPhone(txt)}
                   />
                   <TextInput
-                    style={styles.input}
-                    placeholder='Email'
-                    textContentType='emailAddress'
-                    keyboardType='email-address'
-                    placeholderTextColor='#ddd'
-                    onChangeText={text => setEmail(text)}
+                    label='Email'
                     value={email}
+                    onChangeText={txt => setEmail(txt)}
                   />
                 </View>
               </View>
@@ -88,14 +72,9 @@ export default function SignUp(props) {
           >
             <View style={styles.inputsView}>
               <TextInput
-                style={[styles.input, { alignSelf: 'center' }]}
-                placeholder='CPF'
-                textAlign={'center'}
-                keyboardType='numeric'
-                keyboardAppearance='dark'
-                placeholderTextColor='#ddd'
-                onChangeText={text => setEmail(text)}
+                label='CPF'
                 value={email}
+                onChangeText={txt => setEmail(txt)}
               />
             </View>
           </ProgressStep>
@@ -108,24 +87,15 @@ export default function SignUp(props) {
             onSubmit={() => nav.navigate('Welcome')}>
             <View style={styles.inputsView}>
               <TextInput
-                style={[styles.input, { alignSelf: 'center' }]}
-                placeholder='Crie uma senha'
-                textAlign={'center'}
-                secureTextEntry
-                placeholderTextColor='#ddd'
-                onChangeText={text => setPassword(text)}
-                value={password}
-                key={1}
+                label='Email'
+                value={email}
+                onChangeText={txt => setEmail(txt)}
               />
               <TextInput
-                style={[styles.input, { alignSelf: 'center' }]}
-                placeholder='Confirmar senha'
-                textAlign={'center'}
-                secureTextEntry
-                placeholderTextColor='#ddd'
-                onChangeText={text => setConfirmPass(text)}
-                value={confirmPass}
-                key={2}
+                style={{ fontSize: 22, height: 60 }}
+                label='Email'
+                value={email}
+                onChangeText={txt => setEmail(txt)}
               />
               {password != confirmPass ? <Text style={styles.wrongPass}>Senhas diferentes</Text> : <View />}
             </View>
