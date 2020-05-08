@@ -25,7 +25,7 @@ export default function Header(props) {
         </View>
         : <View style={[styles.container, { backgroundColor: '#fff', }]}>
             <TouchableOpacity
-                onPress={() => props.navigation.toggleDrawer()}
+                onPress={() => props.navigation.goBack()}
             >
                 <Icon
                     style={[styles.togglerIcon,
