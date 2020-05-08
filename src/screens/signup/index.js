@@ -2,9 +2,10 @@ import React, { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, StatusBar, ScrollView } from 'react-native';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
-import { TextInput } from 'react-native-paper';
+import { TextInput, HelperText } from 'react-native-paper';
 
 import AuthContext from '../../contexts/auth';
+import { cpfMask, phoneMask } from '../../utils/inputMasks';
 
 import styles from './styles';
 
@@ -19,6 +20,11 @@ export default function SignUp(props) {
   const { signed, signIn } = useContext(AuthContext);
 
   const nav = useNavigation();
+
+
+  function _hasErrors() {
+    return !email.includes('@');
+  }
 
   return (
     <View style={styles.container}>
@@ -64,8 +70,14 @@ export default function SignUp(props) {
                       keyboardType='phone-pad'
                       autoCorrect={false}
                       value={phone}
-                      onChangeText={txt => setPhone(txt)}
+                      onChangeText={txt => setPhone(phoneMask(txt))}
                     />
+                    <HelperText
+                      type="error"
+                      visible={phone.length > 1 && phone.length < 7}
+                    >
+                      Telefone inválido!
+                    </HelperText>
                   </View>
                   <View style={styles.nameTxtInput}>
                     <TextInput
@@ -75,6 +87,12 @@ export default function SignUp(props) {
                       value={email}
                       onChangeText={txt => setEmail(txt)}
                     />
+                    <HelperText
+                      type="error"
+                      visible={_hasErrors() && email.length > 1}
+                    >
+                      E-mail inválido!
+                    </HelperText>
                   </View>
                 </View>
               </View>
@@ -89,7 +107,7 @@ export default function SignUp(props) {
             nextBtnStyle={styles.nextBtnStyle}
           >
             <View style={styles.inputsView}>
-              <View style={{ flex: 1, paddingHorizontal: 50}}>
+              <View style={{ flex: 1, paddingHorizontal: 50 }}>
                 <TextInput
                   style={{ backgroundColor: '#fff', paddingHorizontal: 5 }}
                   label='CPF'
