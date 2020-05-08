@@ -13,6 +13,7 @@ export default function SignUp(props) {
   const [surname, setSurname] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const { signed, signIn } = useContext(AuthContext);
@@ -35,29 +36,46 @@ export default function SignUp(props) {
           >
             <View>
               <View style={styles.inputsView}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                  <TextInput
-                    label='Nome'
-                    value={name}
-                    onChangeText={txt => setName(txt)}
-                  />
-                  <TextInput
-                    label='Sobrenome'
-                    value={surname}
-                    onChangeText={txt => setSurname(txt)}
-                  />
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 15 }}>
+                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                    <TextInput
+                      style={{ backgroundColor: '#fff' }}
+                      label='Nome'
+                      value={name}
+                      onChangeText={txt => setName(txt)}
+                    />
+                  </View>
+                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                    <TextInput
+                      style={{ backgroundColor: '#fff' }}
+                      label='Sobrenome'
+                      autoCapitalize='words'
+                      autoCorrect={false}
+                      value={surname}
+                      onChangeText={txt => setSurname(txt)}
+                    />
+                  </View>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                  <TextInput
-                    label='Telefone'
-                    value={phone}
-                    onChangeText={txt => setPhone(txt)}
-                  />
-                  <TextInput
-                    label='Email'
-                    value={email}
-                    onChangeText={txt => setEmail(txt)}
-                  />
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 15 }}>
+                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                    <TextInput
+                      style={{ backgroundColor: '#fff' }}
+                      label='Telefone'
+                      keyboardType='phone-pad'
+                      autoCorrect={false}
+                      value={phone}
+                      onChangeText={txt => setPhone(txt)}
+                    />
+                  </View>
+                  <View style={{ flex: 1, paddingHorizontal: 5 }}>
+                    <TextInput
+                      style={{ backgroundColor: '#fff' }}
+                      label='Email'
+                      keyboardType='email-address'
+                      value={email}
+                      onChangeText={txt => setEmail(txt)}
+                    />
+                  </View>
                 </View>
               </View>
             </View>
@@ -71,11 +89,15 @@ export default function SignUp(props) {
             nextBtnStyle={styles.nextBtnStyle}
           >
             <View style={styles.inputsView}>
-              <TextInput
-                label='CPF'
-                value={email}
-                onChangeText={txt => setEmail(txt)}
-              />
+              <View style={{ flex: 1, paddingHorizontal: 50, justifyContent: 'center' }}>
+                <TextInput
+                  style={{ backgroundColor: '#fff', paddingHorizontal: 5 }}
+                  label='CPF'
+                  keyboardType='numeric'
+                  value={cpf}
+                  onChangeText={txt => setCpf(txt)}
+                />
+              </View>
             </View>
           </ProgressStep>
           <ProgressStep
@@ -86,17 +108,28 @@ export default function SignUp(props) {
             finishBtnText='Concluir'
             onSubmit={() => nav.navigate('Welcome')}>
             <View style={styles.inputsView}>
-              <TextInput
-                label='Email'
-                value={email}
-                onChangeText={txt => setEmail(txt)}
-              />
-              <TextInput
-                style={{ fontSize: 22, height: 60 }}
-                label='Email'
-                value={email}
-                onChangeText={txt => setEmail(txt)}
-              />
+              <View style={{ flex: 1, paddingHorizontal: 50, paddingVertical: 5 }}>
+                <TextInput
+                  style={{ paddingHorizontal: 5, backgroundColor: '#fff'  }}
+                  label='Senha'
+                  value={password}
+                  autoCapitalize='none'
+                  secureTextEntry
+                  onChangeText={txt => setPassword(txt)}
+                  key={0}
+                />
+              </View>
+              <View style={{ flex: 1, paddingHorizontal: 50 }}>
+                <TextInput
+                  style={{ paddingHorizontal: 5, backgroundColor: '#fff' }}
+                  label='Confirme senha'
+                  value={confirmPass}
+                  autoCapitalize='none'
+                  secureTextEntry
+                  onChangeText={txt => setConfirmPass(txt)}
+                  key={1}
+                />
+              </View>
               {password != confirmPass ? <Text style={styles.wrongPass}>Senhas diferentes</Text> : <View />}
             </View>
           </ProgressStep>
