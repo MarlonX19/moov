@@ -16,6 +16,7 @@ import startMarker from '../../assets/start.png';
 
 import AuthContext from '../../contexts/auth';
 
+import MainHeader from '../../components/MainHeader';
 import Header from '../../components/Header';
 import SearchBox from '../../components/SearchBox';
 
@@ -108,7 +109,7 @@ export default function Home(props) {
 
     return (
         <View style={styles.container}>
-            <Header head='header' navigation={props.navigation} handleFun={() => handleSignOut()} />
+            <MainHeader head='header' navigation={props.navigation} handleFun={() => handleSignOut()} />
             {distanceBetween ? <View></View> : <View>
                 <SearchBox direction='from' onLocation={handleLocationSelected} />
                 <SearchBox direction='to' onLocation={handleDestinationSelected} />

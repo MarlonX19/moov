@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function DrawerContent(props) {
 
+    console.log(props);
+
     return (
         <View style={styles.drawerContent}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 10, paddingVertical: 20, borderBottomWidth: 0.5, borderBottomColor: '#ddd' }}>
@@ -25,18 +27,24 @@ export default function DrawerContent(props) {
                 <Text style={{ color: '#999', fontFamily: 'sans-serif-thin' }}>marlon@gmail.com</Text>
             </View>
             <View style={{ flex: 3, padding: 10 }}>
-                <View style={styles.menuOption}>
+                <TouchableOpacity
+                    style={styles.menuOption}
+                    onPress={() => props.navigation.navigate('Profile')}
+                >
                     <View style={{ width: 25, marginLeft: 2 }}>
                         <Icon name="user" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Perfil</Text>
-                </View>
-                <View style={styles.menuOption}>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.menuOption}
+                    onPress={() => props.navigation.navigate('Payments')}
+                >
                     <View style={{ width: 25 }}>
                         <Icon name="money-bill-alt" size={16} color="#FA960F" />
                     </View>
                     <Text style={styles.menuOptionText}>Pagamentos</Text>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.menuOption}>
                     <View style={{ width: 25 }}>
                         <Icon name="map-marked-alt" size={16} color="#FA960F" />

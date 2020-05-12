@@ -10,20 +10,8 @@ const HEIGHT = Dimensions.get('window').height;
 export default function Header(props) {
 
 
-    return props.head == 'header' ?
-        <View style={styles.container}>
-            <TouchableOpacity
-                onPress={() => props.navigation.toggleDrawer()}
-            >
-                <Icon style={styles.togglerIcon} name="navicon" size={22} color="#525151" />
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => props.navigation.navigate('Test')}
-            >
-                <Icon style={styles.questionicon} name="question" size={22} color="#525151" />
-            </TouchableOpacity>
-        </View>
-        : <View style={[styles.container, { backgroundColor: '#fff', }]}>
+    return (
+         <View style={styles.container}>
             <TouchableOpacity
                 onPress={() => props.navigation.goBack()}
             >
@@ -37,7 +25,7 @@ export default function Header(props) {
                     size={22}
                     color="#525151" />
             </TouchableOpacity>
-            <Text>Ajuda</Text>
+                <Text>{props.head}</Text>
             <Icon
                 style={[styles.togglerIcon,
                 {
@@ -47,7 +35,8 @@ export default function Header(props) {
                 name="home"
                 size={22}
                 color="#525151" />
-        </View>;
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -58,27 +47,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: 'transparent',
-        position: 'absolute',
-        top: 0,
-        zIndex: 2,
+        backgroundColor: '#fff',
+        zIndex: 5,
     },
     togglerIcon: {
         paddingHorizontal: 12,
-        paddingVertical: 10,
-        borderRadius: 30,
-        backgroundColor: '#fff',
-        shadowColor: "black",
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0,
-        shadowRadius: 30,
-        elevation: 20
-    },
-    questionicon: {
-        paddingHorizontal: 14,
         paddingVertical: 10,
         borderRadius: 30,
         backgroundColor: '#fff',
