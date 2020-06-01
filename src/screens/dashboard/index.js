@@ -5,6 +5,7 @@ import Geolocation from 'react-native-geolocation-service';
 import MapViewDirections from 'react-native-maps-directions';
 import { getDistance } from 'geolib';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import io from 'socket.io-client';
 
 
 const WIDTH = Dimensions.get('window').width;
@@ -26,6 +27,7 @@ export default function Home(props) {
     const [location, setLocation] = useState({});
     const [destination, setDestination] = useState({});
     const [distanceBetween, setDistanceBetween] = useState('');
+    const [socket, setSocket] = useState(null);
     const { signOut } = useContext(AuthContext);
 
 
@@ -97,7 +99,23 @@ export default function Home(props) {
     useEffect(() => {
         getLocation()
 
+        let skt = io('http://192.168.15.13:3000/usuarios')
+        setSocket(skt);
+
     }, [])
+
+
+    useEffect(() => {
+        if (socket) {
+          socket.on('connected', (data, name) => {
+            alert('conectou aquiii')
+    
+          })
+    
+        }
+    
+    
+      }, [socket])
 
 
     useEffect(() => {
