@@ -108,13 +108,11 @@ export default function Home(props) {
     useEffect(() => {
         if (socket) {
           socket.on('connected', (data, name) => {
-            alert('conectou aquiii')
-    
+            //alert('conectou aquiii')
           })
     
         }
-    
-    
+
       }, [socket])
 
 
@@ -123,6 +121,10 @@ export default function Home(props) {
         destination.latitude && destination.longitude ? _getDistance() : false;
 
     }, [destination])
+
+    function handleContinue(){
+        socket.emit('continue')
+    }
 
 
     return (
@@ -194,7 +196,7 @@ export default function Home(props) {
                     <View style={{ width: '100%', borderBottomWidth: 0.5, borderBottomColor: '#ddd' }}></View>
                     <View>
                         <TouchableOpacity
-                            onPress={() => false}
+                            onPress={() => handleContinue()}
                             style={styles.btn}
                         >
                             <Text style={styles.btnText}>Continuar</Text>
