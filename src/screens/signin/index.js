@@ -13,8 +13,10 @@ export default function SignIn(props) {
 
   const nav = useNavigation();
 
-  function handleLogin(){
-    signIn();
+  function handleLogin() {
+    signIn(email, password);
+
+
   }
 
 

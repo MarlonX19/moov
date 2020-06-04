@@ -7,6 +7,8 @@ import { TextInput, HelperText } from 'react-native-paper';
 import AuthContext from '../../contexts/auth';
 import { cpfMask, phoneMask } from '../../utils/inputMasks';
 
+import { api } from '../../services/auth';
+
 import styles from './styles';
 
 export default function SignUp(props) {
@@ -14,6 +16,8 @@ export default function SignUp(props) {
   const [surname, setSurname] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [number_starts, setNumber_starts] = useState(5);
+  const [push_id, setPush_id] = useState('eeeeepppppoooowwwww');
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
@@ -24,6 +28,31 @@ export default function SignUp(props) {
 
   function _hasErrors() {
     return !email.includes('@');
+  }
+
+
+  async function handleLogin() {
+
+    const res = await api.post('/users', {
+      first_name: name,
+      last_name: surname,
+      phone,
+      email,
+      password,
+      number_starts,
+      push_id,
+      document: cpf
+    })
+      .then(function (response) {
+        console.log(response);
+        nav.navigate('Welcome');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      console.log('res')
+      console.log(res)
   }
 
   return (
@@ -124,7 +153,7 @@ export default function SignUp(props) {
             previousBtnTextStyle={styles.previousBtnTextStyle}
             nextBtnTextStyle={styles.nextBtnTextStyle}
             finishBtnText='Concluir'
-            onSubmit={() => nav.navigate('Welcome')}>
+            onSubmit={() => handleLogin()}>
             <View style={styles.inputsView}>
               <View style={styles.passwordInputView}>
                 <TextInput
