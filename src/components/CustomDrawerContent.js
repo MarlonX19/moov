@@ -16,7 +16,6 @@ function CustomDrawerContent(props) {
   const [userData, setUserData] = useState(null);
 
   const { user } = useContext(AuthContext);
-  console.log(user)
 
 
   return (

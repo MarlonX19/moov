@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Image, TextInput, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
@@ -7,9 +7,13 @@ const windowHeight = Dimensions.get('window').height;
 import Header from '../../components/Header'
 import styles from './styles';
 
+import AuthContext from '../../contexts/auth';
+
 export default function profile(props) {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
+
+  const { user } = useContext(AuthContext);
 
   return (
     <>
@@ -17,14 +21,14 @@ export default function profile(props) {
       <View style={styles.container}>
         <View style={styles.topCard}>
           <View style={styles.imageView}>
-            <Image source={require('../../assets/profile.png')} style={{ borderRadius: 50, width: 90, height: 90 }} />
+            <Image source={{ uri: `http://192.168.15.13:3000/files/${user.avatar_path}` }} style={{ borderRadius: 15, width: 90, height: 90 }} />
             <Text style={styles.imageText}>Mudar foto de perfil ></Text>
           </View>
           <View style={styles.inputs}>
             <Text style={{ color: 'grey' }}>Nome</Text>
             <TextInput
               style={styles.inputsTxt}
-              placeholder='Marlon'
+              placeholder={user?.first_name}
               placeholderTextColor='black'
               onChangeText={text => setName(text)}
               value={name}
@@ -34,7 +38,7 @@ export default function profile(props) {
             <Text style={{ color: 'grey' }}>Sobrenome</Text>
             <TextInput
               style={styles.inputsTxt}
-              placeholder='Englemam'
+              placeholder={user?.last_name}
               placeholderTextColor='black'
               onChangeText={text => setLastName(text)}
               value={lastName}
@@ -49,7 +53,7 @@ export default function profile(props) {
           </View>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>E-mail</Text>
-            <Text style={styles.phoneValue}>marlon.eng******@gmail.com ></Text>
+            <Text style={styles.phoneValue}>{user?.email} ></Text>
           </View>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>Senha</Text>
