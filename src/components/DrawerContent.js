@@ -4,10 +4,7 @@ import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
-
 export default function DrawerContent(props) {
-
-    console.log(props);
 
     return (
         <View style={styles.drawerContent}>

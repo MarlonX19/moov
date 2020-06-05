@@ -28,7 +28,9 @@ export default function Home(props) {
     const [destination, setDestination] = useState({});
     const [distanceBetween, setDistanceBetween] = useState('');
     const [socket, setSocket] = useState(null);
-    const { signOut } = useContext(AuthContext);
+    const { signOut, user } = useContext(AuthContext);
+
+
 
 
     function handleSignOut() {
@@ -107,13 +109,13 @@ export default function Home(props) {
 
     useEffect(() => {
         if (socket) {
-          socket.on('connected', (data, name) => {
-            //alert('conectou aquiii')
-          })
-    
+            socket.on('connected', (data, name) => {
+                //alert('conectou aquiii')
+            })
+
         }
 
-      }, [socket])
+    }, [socket])
 
 
     useEffect(() => {
@@ -122,7 +124,7 @@ export default function Home(props) {
 
     }, [destination])
 
-    function handleContinue(){
+    function handleContinue() {
         socket.emit('continue')
     }
 
