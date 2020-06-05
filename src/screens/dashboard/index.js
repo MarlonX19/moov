@@ -125,7 +125,7 @@ export default function Home(props) {
     }, [destination])
 
     function handleContinue() {
-        socket.emit('continue')
+        socket.emit('continue', user)
     }
 
 
