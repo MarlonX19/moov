@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, StatusBar, ScrollView } from 'react-native';
+import { View, Text, StatusBar, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { TextInput, HelperText } from 'react-native-paper';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import AuthContext from '../../contexts/auth';
 import { cpfMask, phoneMask } from '../../utils/inputMasks';
@@ -21,6 +22,7 @@ export default function SignUp(props) {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const [image, setImage] = useState('https://www.gravatar.com/avatar/');
   const { signed, signIn } = useContext(AuthContext);
 
   const nav = useNavigation();
@@ -32,17 +34,69 @@ export default function SignUp(props) {
 
 
   async function handleLogin() {
+    // const res = await api.post('/users', {
+    //   first_name: name,
+    //   last_name: surname,
+    //   phone,
+    //   email,
+    //   password,
+    //   number_starts,
+    //   push_id,
+    //   document: cpf
+    // })
+    //   .then(function (response) {
+    //     console.log(response);
+    //     nav.navigate('Welcome');
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
-    const res = await api.post('/users', {
-      first_name: name,
-      last_name: surname,
-      phone,
-      email,
-      password,
-      number_starts,
-      push_id,
-      document: cpf
-    })
+    // console.log('res')
+    // console.log(res)
+    uploadImageAsync(image)
+  }
+
+
+  function handleImageChange() {
+    ImagePicker.openPicker({
+      width: 350,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      console.log(image);
+      setImage(image.path)
+    });
+  }
+
+  async function uploadImageAsync(uri) {
+    let uriParts = uri.split(".");
+    let fileType = uriParts[uriParts.length - 1];
+
+    let formData = new FormData();
+
+    formData.append("userphoto", {
+      uri,
+      name: `photo.${fileType}`,
+      type: `image/${fileType}`,
+    });
+    formData.append("first_name", name);
+    formData.append("last_name", surname);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("password", password);
+    formData.append("number_starts", number_starts);
+    formData.append("push_id", push_id);
+    formData.append("document", cpf);
+
+
+    let options = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    api.post("/users", formData, options)
       .then(function (response) {
         console.log(response);
         nav.navigate('Welcome');
@@ -50,9 +104,6 @@ export default function SignUp(props) {
       .catch(function (error) {
         console.log(error);
       });
-
-      console.log('res')
-      console.log(res)
   }
 
   return (
@@ -145,6 +196,23 @@ export default function SignUp(props) {
                   onChangeText={txt => setCpf(cpfMask(txt))}
                 />
               </View>
+            </View>
+          </ProgressStep>
+          <ProgressStep
+            label="Avatar"
+            previousBtnText='Anterior'
+            previousBtnTextStyle={styles.previousBtnTextStyle}
+            nextBtnTextStyle={styles.nextBtnTextStyle}
+            finishBtnText='Concluir'>
+            <View style={styles.inputsView}>
+
+              <Image source={{ uri: image }} style={{ alignSelf: 'center', borderRadius: 15, width: 110, height: 110 }} />
+              <TouchableOpacity
+                style={{ padding: 10 }}
+                onPress={() => handleImageChange()}
+              >
+                <Text style={{ fontSize: 18, color: 'grey', textAlign: 'center' }}>Escolher foto</Text>
+              </TouchableOpacity>
             </View>
           </ProgressStep>
           <ProgressStep

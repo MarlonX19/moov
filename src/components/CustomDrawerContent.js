@@ -23,7 +23,7 @@ function CustomDrawerContent(props) {
     <DrawerContentScrollView {...props}>
       <View style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start', height: 200, borderBottomWidth: 0.4, borderBottomColor: '#ddd' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-          <Image source={{ uri: user.avatar_path }} style={{ width: 80, height: 80, borderRadius: 30, marginRight: 10 }} />
+          <Image source={{ uri: `http://192.168.15.13:3000/files/${user.avatar_path}` }} style={{ width: 90, height: 90, borderRadius: 30, marginRight: 10 }} />
           <StarRating
             disabled={false}
             maxStars={5}
