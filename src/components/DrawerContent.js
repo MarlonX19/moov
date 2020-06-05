@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
+let res = null;
 
 export default function DrawerContent(props) {
+
+    (async function () {
+        try {
+            res = await AsyncStorage.getItem('@RNAuth:user');
+
+            console.log('aqui dados do user dentro do content drawer')
+            console.log(res)
+        } catch (error) {
+            console.error(error);
+        }
+    })()
+
+
 
     return (
         <View style={styles.drawerContent}>
@@ -20,7 +35,7 @@ export default function DrawerContent(props) {
                         selectedStar={(rating) => { }}
                     />
                 </View>
-                <Text style={{ color: '#525151', fontWeight: '700', fontSize: 20, fontFamily: 'sans-serif-thin' }}>Marlon Englemam</Text>
+                <Text style={{ color: '#525151', fontWeight: '700', fontSize: 20, fontFamily: 'sans-serif-thin' }}>{res?.first_name}</Text>
                 <Text style={{ color: '#999', fontFamily: 'sans-serif-thin' }}>marlon@gmail.com</Text>
             </View>
             <View style={{ flex: 3, padding: 10 }}>
