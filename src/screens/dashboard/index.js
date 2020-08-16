@@ -6,6 +6,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import { getDistance } from 'geolib';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import io from 'socket.io-client';
+import { GOOGLE_PLACES_API_KEY } from "@env";
 
 
 const WIDTH = Dimensions.get('window').width;
@@ -156,7 +157,7 @@ export default function Home(props) {
                         <MapViewDirections
                             origin={location}
                             destination={destination}
-                            apikey='AIzaSyBxrHIlkzVvQLoQuRHBI-46AMuJm5GyffA'
+                            apikey= {GOOGLE_PLACES_API_KEY}
                             strokeWidth={3}
                             strokeColor='purple'
                             mode='DRIVING'

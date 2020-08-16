@@ -19,6 +19,7 @@
     "geolib": "^3.2.1",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-dotenv": "^2.3.0",
     "react-native-geolocation-service": "^4.0.0",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-google-places-autocomplete": "^1.4.1",
