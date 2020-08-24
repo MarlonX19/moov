@@ -35,26 +35,6 @@ export default function SignUp(props) {
 
 
   async function handleLogin() {
-    // const res = await api.post('/users', {
-    //   first_name: name,
-    //   last_name: surname,
-    //   phone,
-    //   email,
-    //   password,
-    //   number_starts,
-    //   push_id,
-    //   document: cpf
-    // })
-    //   .then(function (response) {
-    //     console.log(response);
-    //     nav.navigate('Welcome');
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-
-    // console.log('res')
-    // console.log(res)
     uploadImageAsync(image)
   }
 
@@ -104,6 +84,10 @@ export default function SignUp(props) {
       })
       .catch(function (error) {
         console.log(error);
+        showMessage({
+          message: "Erro ao criar conta",
+          type: "danger",
+        });
       });
   }
 
