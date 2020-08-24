@@ -4,6 +4,7 @@ import { View, Text, StatusBar, ScrollView, Image, TouchableOpacity } from 'reac
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { TextInput, HelperText } from 'react-native-paper';
 import ImagePicker from 'react-native-image-crop-picker';
+import { showMessage } from "react-native-flash-message";
 
 import AuthContext from '../../contexts/auth';
 import { cpfMask, phoneMask } from '../../utils/inputMasks';
@@ -22,7 +23,7 @@ export default function SignUp(props) {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
-  const [image, setImage] = useState('https://www.gravatar.com/avatar/');
+  const [image, setImage] = useState('https://www.gravatar.com/avatar/?d=retro');
   const { signed, signIn } = useContext(AuthContext);
 
   const nav = useNavigation();
@@ -106,6 +107,23 @@ export default function SignUp(props) {
       });
   }
 
+
+  function checkEmailExistence() {
+    api.post('/checkEmail', {
+      email
+    })
+      .then(response => {
+        console.log(response.data)
+        showMessage({
+          message: "Email informado já está cadastrado",
+          type: "info",
+        });
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#FA960F' />
@@ -166,6 +184,7 @@ export default function SignUp(props) {
                       keyboardType='email-address'
                       value={email}
                       onChangeText={txt => setEmail(txt)}
+                      onBlur={() => checkEmailExistence()}
                     />
                     <HelperText
                       type="error"
@@ -206,7 +225,9 @@ export default function SignUp(props) {
             finishBtnText='Concluir'>
             <View style={styles.inputsView}>
 
-              <Image source={{ uri: image }} style={{ alignSelf: 'center', borderRadius: 15, width: 110, height: 110 }} />
+              <Image
+                source={{ uri: image }}
+                style={{ alignSelf: 'center', borderRadius: 15, width: 110, height: 110 }} />
               <TouchableOpacity
                 style={{ padding: 10 }}
                 onPress={() => handleImageChange()}
