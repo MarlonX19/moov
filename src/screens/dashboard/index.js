@@ -19,7 +19,6 @@ import startMarker from '../../assets/start.png';
 import AuthContext from '../../contexts/auth';
 
 import MainHeader from '../../components/MainHeader';
-import Header from '../../components/Header';
 import SearchBox from '../../components/SearchBox';
 
 import styles from './styles';

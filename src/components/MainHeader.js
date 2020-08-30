@@ -18,7 +18,7 @@ export default function Header(props) {
         <Icon style={styles.togglerIcon} name="navicon" size={22} color="#525151" />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate('Test')}
+        onPress={() => props.navigation.navigate('Ajuda')}
       >
         <Icon style={styles.questionicon} name="question" size={22} color="#525151" />
       </TouchableOpacity>

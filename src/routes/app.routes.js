@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Dashboard from '../screens/dashboard';
-import Test from '../screens/test';
+import Help from '../screens/help';
 import Profile from '../screens/profile';
 import Payments from '../screens/payments';
 import History from '../screens/history';
@@ -33,7 +33,7 @@ const AppRoutes = () => (
     <AppStack.Screen name="Profile" component={Profile} />
     <AppStack.Screen name="Pagamentos" component={Payments} />
     <AppStack.Screen name="Historico" component={History} />
-    <AppStack.Screen name="Test" component={Test} />
+    <AppStack.Screen name="Ajuda" component={Help} />
   </AppStack.Navigator>
 )
 

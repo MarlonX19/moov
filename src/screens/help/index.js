@@ -7,7 +7,7 @@ import AuthContext from '../../contexts/auth';
 
 import styles from './styles';
 
-export default function Test(props) {
+export default function Help(props) {
   const { signOut } = useContext(AuthContext);
 
   function handleSignOut() {
@@ -16,7 +16,7 @@ export default function Test(props) {
 
   return (
     <View style={styles.container}>
-      <Header head='test' navigation={props.navigation} />
+      <Header head='Ajuda' navigation={props.navigation} />
       <View style={styles.mainView}>
 
       </View>
