@@ -59,6 +59,27 @@ export const AuthProvider = ({ children }) => {
       });
   }
 
+
+  async function updateUser(userData) {
+    return api.put("/users", { userData })
+      .then(async response => {
+        console.log('========response da atualização aqui=======')
+        console.log(response.data[0])
+        try {
+          await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data[0]));
+          await AsyncStorage.setItem('@RNAuth:token', response.data[0].push_id);
+        } catch (error) {
+          console.log(error);
+        }
+        setUser(response.data[0]);
+        return { message: 'updated' }
+      })
+      .catch((error) => {
+        console.log(error);
+        return { message: 'error' }
+      });
+  }
+
   function signOut() {
     AsyncStorage.clear().then(() => {
       setUser(null);
@@ -67,7 +88,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading }} >
+    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading, updateUser }} >
       {children}
     </AuthContext.Provider>
   )

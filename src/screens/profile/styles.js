@@ -4,11 +4,10 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
   },
 
   topCard: {
-    flex: 2,
+    
     backgroundColor: '#fff',
     marginVertical: 5,
     paddingVertical: 20
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
   },
 
   bottomCard: {
-    flex: 2,
+    height: 300,
     justifyContent: 'space-evenly',
     backgroundColor: '#fff',
     marginVertical: 5

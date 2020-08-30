@@ -166,6 +166,7 @@ export default function SignUp(props) {
                       style={{ backgroundColor: '#fff' }}
                       label='Email'
                       keyboardType='email-address'
+                      autoCapitalize='none'
                       value={email}
                       onChangeText={txt => setEmail(txt)}
                       onBlur={() => checkEmailExistence()}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Image, TextInput, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { showMessage } from "react-native-flash-message";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -13,7 +14,36 @@ export default function profile(props) {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const { user } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext);
+
+  console.log(user)
+
+  useEffect(() => {
+    if (user?.first_name && user?.last_name) {
+      setName(user.first_name)
+      setLastName(user.last_name)
+    }
+  }, [])
+
+
+  async function handleUpdate() {
+    let newUserData = { ...user, ...{ first_name: name, last_name: lastName } };
+    const res = await updateUser(newUserData);
+
+    if (res?.message == 'updated') {
+      showMessage({
+        message: "Dado atualizado!",
+        type: "success",
+      });
+    } else {
+      showMessage({
+        message: "Erro ao atualizar!",
+        type: "warning",
+      });
+    }
+  }
+
+
 
   return (
     <>
@@ -32,6 +62,7 @@ export default function profile(props) {
               placeholderTextColor='black'
               onChangeText={text => setName(text)}
               value={name}
+              onBlur={() => handleUpdate()}
             />
           </View>
           <View style={styles.inputs}>
@@ -42,6 +73,7 @@ export default function profile(props) {
               placeholderTextColor='black'
               onChangeText={text => setLastName(text)}
               value={lastName}
+              onBlur={() => handleUpdate()}
             />
           </View>
         </View>
@@ -49,15 +81,15 @@ export default function profile(props) {
         <View style={styles.bottomCard}>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>Número de telefone</Text>
-            <Text style={styles.phoneValue}>(19) 999****51 ></Text>
+            <Text style={styles.phoneValue}>{user?.phone}></Text>
           </View>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>E-mail</Text>
-            <Text style={styles.phoneValue}>{user?.email} ></Text>
+            <Text style={styles.phoneValue}>{user?.email}></Text>
           </View>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>Senha</Text>
-            <Text style={styles.phoneValue}>Alterar ></Text>
+            <Text style={styles.phoneValue}>Alterar></Text>
           </View>
         </View>
       </View>
