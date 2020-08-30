@@ -207,7 +207,7 @@ export default function SignUp(props) {
             previousBtnText='Anterior'
             previousBtnTextStyle={styles.previousBtnTextStyle}
             nextBtnTextStyle={styles.nextBtnTextStyle}
-            finishBtnText='Concluir'>
+            nextBtnText='próximo'>
             <View style={styles.inputsView}>
 
               <Image
