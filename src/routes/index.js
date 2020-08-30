@@ -11,7 +11,7 @@ const Routes = () => {
   const { signed, loading } = useContext(AuthContext);
 
 
-  if (false) {
+  if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItem: 'center' }}>
         <ActivityIndicator size='large' />
