@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, TouchableOpacity, TextInput, StatusBar } from 'react-native';
+import { showMessage } from "react-native-flash-message";
 
 import AuthContext from '../../contexts/auth';
 
@@ -13,9 +14,15 @@ export default function SignIn(props) {
 
   const nav = useNavigation();
 
-  function handleLogin() {
-    signIn(email, password);
+  async function handleLogin() {
+    const res = await signIn(email, password);
 
+    if(res.message === 'failed') {
+      showMessage({
+        message: "Erro ao tentar logar!",
+        type: "danger",
+      });
+    }
   }
 
 

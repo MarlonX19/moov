@@ -30,18 +30,8 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   async function signIn(email, password) {
-    // const response = await auth.Signin(email, password);
-    // console.log(response)
-    // console.log('response aqui')
-    // if (response !== 404) {
-    //   setUser(response.user);
 
-    //   await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.user));
-    //   await AsyncStorage.setItem('@RNAuth:token', response.push_id);
-    // }
-
-
-    api.post("/login", { email, password })
+    return api.post("/login", { email, password })
       .then(async response => {
         console.log('response aqui')
         console.log(response.data[0].push_id)
@@ -51,11 +41,15 @@ export const AuthProvider = ({ children }) => {
           await AsyncStorage.setItem('@RNAuth:token', response.data[0].push_id);
         } catch (error) {
           console.log(error);
+
+          return { message: 'logged' }
         }
         setUser(response.data[0]);
       })
       .catch((error) => {
         console.log(error);
+
+        return { message: 'failed' }
       });
   }
 
@@ -90,7 +84,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return api.put("/userPhoto", formData, options)
-      .then( async function (response) {
+      .then(async function (response) {
         console.log(response.data[0]);
         try {
           await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data[0]));
