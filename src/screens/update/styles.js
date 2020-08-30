@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    backgroundColor: '#fff'
   },
 
   imageView: {
@@ -12,12 +12,17 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 30,
     alignSelf: 'center',
-    marginTop: 50,
+    marginTop: -90,
   },
 
   updateButton: {
     alignSelf: 'center',
     marginTop: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 4,
+    borderColor: 'purple',
+    borderWidth: 0.6
   },
 
   updateTxt: {

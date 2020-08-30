@@ -74,6 +74,9 @@ function Update(props) {
     return (
       <View style={styles.container}>
         <Header head='Atualizar' navigation={props.navigation} />
+        <View style={{ width: '100%', height: 180}}>
+          <Image source={{ uri: newPic}} style={{ width: '100%', height: '100%'}} />
+        </View>
         <Image
           source={{ uri: newPic }}
           style={styles.imageView} />
