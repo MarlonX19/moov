@@ -80,6 +80,34 @@ export const AuthProvider = ({ children }) => {
       });
   }
 
+
+  async function updateUserPhoto(formData) {
+
+    let options = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    return api.put("/userPhoto", formData, options)
+      .then( async function (response) {
+        console.log(response.data[0]);
+        try {
+          await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data[0]));
+          await AsyncStorage.setItem('@RNAuth:token', response.data[0].push_id);
+        } catch (error) {
+          console.log(error);
+        }
+        return { message: 'updated' }
+
+      })
+      .catch(function (error) {
+        console.log(error);
+        return { message: 'error' }
+
+      });
+  }
+
   function signOut() {
     AsyncStorage.clear().then(() => {
       setUser(null);
@@ -88,7 +116,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading, updateUser }} >
+    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading, updateUser, updateUserPhoto }} >
       {children}
     </AuthContext.Provider>
   )

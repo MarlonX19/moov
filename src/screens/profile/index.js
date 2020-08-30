@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, Image, TextInput, Dimensions, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, Text, Image, TextInput, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { showMessage } from "react-native-flash-message";
 
 const windowWidth = Dimensions.get('window').width;
@@ -13,17 +13,23 @@ import AuthContext from '../../contexts/auth';
 export default function profile(props) {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [avatar, setAvatar] = useState('');
 
   const { user, updateUser } = useContext(AuthContext);
 
-  console.log(user)
 
   useEffect(() => {
     if (user?.first_name && user?.last_name) {
       setName(user.first_name)
       setLastName(user.last_name)
+      setAvatar(`http://192.168.15.13:3000/files/${user.avatar_path}`)
     }
   }, [])
+
+  useEffect(() => {
+      setAvatar(`http://192.168.15.13:3000/files/${user.avatar_path}`)
+    
+  }, [user.avatar_path])
 
 
   async function handleUpdate() {
@@ -50,9 +56,14 @@ export default function profile(props) {
       <Header head='Perfil' navigation={props.navigation} handleFun={() => false} />
       <View style={styles.container}>
         <View style={styles.topCard}>
-          <View style={styles.imageView}>
-            <Image source={{ uri: `http://192.168.15.13:3000/files/${user.avatar_path}` }} style={{ borderRadius: 15, width: 90, height: 90 }} />
-            <Text style={styles.imageText}>Mudar foto de perfil ></Text>
+          <View >
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('Atualizar', { forUpdate: 'image' })}
+              style={styles.imageView}
+            >
+              <Image source={{ uri: avatar }} style={{ borderRadius: 15, width: 90, height: 90 }} />
+              <Text style={styles.imageText}>Mudar foto de perfil</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.inputs}>
             <Text style={{ color: 'grey' }}>Nome</Text>
@@ -81,15 +92,15 @@ export default function profile(props) {
         <View style={styles.bottomCard}>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>Número de telefone</Text>
-            <Text style={styles.phoneValue}>{user?.phone}></Text>
+            <Text style={styles.phoneValue}>{user?.phone}</Text>
           </View>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>E-mail</Text>
-            <Text style={styles.phoneValue}>{user?.email}></Text>
+            <Text style={styles.phoneValue}>{user?.email}</Text>
           </View>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>Senha</Text>
-            <Text style={styles.phoneValue}>Alterar></Text>
+            <Text style={styles.phoneValue}>Alterar</Text>
           </View>
         </View>
       </View>
