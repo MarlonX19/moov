@@ -67,14 +67,6 @@ export default function ForgotPass() {
                 value={code}
               />
             </View>
-            <View style={styles.btnView}>
-              <TouchableOpacity
-                onPress={() => false}
-                style={styles.btn}
-              >
-                <Text style={styles.btnText}>VERIFICAR CÓDIGO</Text>
-              </TouchableOpacity>
-            </View>
           </ProgressStep>
           <ProgressStep
             label="Nova senha"
