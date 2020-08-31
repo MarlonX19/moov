@@ -1,14 +1,51 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
+import { showMessage } from "react-native-flash-message";
 
 import styles from './styles';
+
+import { api } from '../../services/auth';
 
 export default function ForgotPass() {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  function checkEmailExistence() {
+    api.post('/checkEmail', {
+      email
+    })
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.log(error);
+        showMessage({
+          message: "Email informado não existe em nosso sistema",
+          type: "info",
+        });
+      })
+  }
+
+  async function handleForgotPass(){
+    const res = await api.post('/forgot', {
+      email
+    })
+    
+    if(res.status === 200){
+      showMessage({
+        message: res.data.message,
+        type: "success",
+      });
+    } else {
+      showMessage({
+        message: 'Erro ao gerar ou enviar código',
+        type: "warning",
+      });
+    }
+  }
 
 
   return (
@@ -30,14 +67,16 @@ export default function ForgotPass() {
                   style={styles.input}
                   placeholder='Email'
                   textContentType='emailAddress'
+                  autoCapitalize='none'
                   placeholderTextColor='#ddd'
                   onChangeText={text => setEmail(text)}
                   value={email}
+                  onBlur={() => checkEmailExistence()}
                 />
               </View>
               <View style={styles.btnView}>
                 <TouchableOpacity
-                  onPress={() => false}
+                  onPress={() => handleForgotPass()}
                   style={styles.btn}
                 >
                   <Text style={styles.btnText}>ENVIAR CÓDIGO</Text>
