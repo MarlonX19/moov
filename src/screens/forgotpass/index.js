@@ -29,12 +29,12 @@ export default function ForgotPass() {
       })
   }
 
-  async function handleForgotPass(){
+  async function handleForgotPass() {
     const res = await api.post('/forgot', {
       email
     })
-    
-    if(res.status === 200){
+
+    if (res.status === 200) {
       showMessage({
         message: res.data.message,
         type: "success",
@@ -45,6 +45,27 @@ export default function ForgotPass() {
         type: "warning",
       });
     }
+  }
+
+
+  function handleUpdatePassword() {
+    api.post('/reset', {
+      email: email,
+      token: code,
+      password: password
+    })
+      .then(response => {
+        showMessage({
+          message: 'Senha alterada com sucesso!',
+          type: "success",
+        });
+      })
+      .catch(error => {
+        showMessage({
+          message: 'Falha ao tentar alterar senha',
+          type: "warning",
+        });
+      })
   }
 
 
@@ -100,7 +121,8 @@ export default function ForgotPass() {
                 style={[styles.input, { paddingLeft: 0, fontSize: 18 }]}
                 placeholder='_ _ _ _'
                 textAlign={'center'}
-                keyboardType='numeric'
+                keyboardType='default'
+                autoCapitalize='none'
                 placeholderTextColor='#ddd'
                 onChangeText={text => setCode(text)}
                 value={code}
@@ -112,7 +134,8 @@ export default function ForgotPass() {
             previousBtnText='Anterior'
             previousBtnTextStyle={styles.previousBtnTextStyle}
             nextBtnTextStyle={styles.nextBtnTextStyle}
-            finishBtnText='Concluir'>
+            finishBtnText='Concluir'
+            onSubmit={() => handleUpdatePassword()}>
             <View style={styles.inputsView}>
               <TextInput
                 style={[styles.input, { paddingLeft: 0 }]}
