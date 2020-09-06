@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Image, TextInput, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { showMessage } from "react-native-flash-message";
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+import { phoneMask } from '../../utils/inputMasks';
 
 import Header from '../../components/Header'
 import styles from './styles';
@@ -27,8 +26,8 @@ export default function profile(props) {
   }, [])
 
   useEffect(() => {
-      setAvatar(`http://192.168.15.13:3000/files/${user.avatar_path}`)
-    
+    setAvatar(`http://192.168.15.13:3000/files/${user.avatar_path}`)
+
   }, [user.avatar_path])
 
 
@@ -92,7 +91,7 @@ export default function profile(props) {
         <View style={styles.bottomCard}>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>Número de telefone</Text>
-            <Text style={styles.phoneValue}>{user?.phone}</Text>
+            <Text style={styles.phoneValue}>{phoneMask(user?.phone)}</Text>
           </View>
           <View style={styles.fieldsView}>
             <Text style={styles.phoneText}>E-mail</Text>
