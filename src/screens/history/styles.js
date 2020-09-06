@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'#fff',
+    backgroundColor: '#fff',
     flex: 1,
   },
 
@@ -16,6 +16,13 @@ const styles = StyleSheet.create({
   NoRidesText: {
     fontSize: 20,
     color: 'grey',
+  },
+
+  ActivityIndicatorView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
   }
 })
 
