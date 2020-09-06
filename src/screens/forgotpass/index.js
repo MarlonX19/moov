@@ -13,31 +13,43 @@ export default function ForgotPass() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  function checkEmailExistence() {
-    api.post('/checkEmail', {
-      email
-    })
-      .then(response => {
-        console.log(response.data)
-      })
-      .catch(error => {
-        console.log(error);
-        showMessage({
-          message: "Email informado não existe em nosso sistema",
-          type: "info",
-        });
-      })
+  const type = 'users';
+
+  async function checkEmailExistence() {
+    const response = await api.post('/checkEmail', { email, type })
+
+    if (response.data.messageCode == '404') {
+      showMessage({
+        message: 'E-mail não encontrado',
+        type: "warning",
+      });
+    }
+
+    if (response.data.messageCode == '200') {
+      showMessage({
+        message: 'E-mail encontrado',
+        type: "success",
+      });
+    }
   }
 
   async function handleForgotPass() {
+    let type = 'users';
     const res = await api.post('/forgot', {
-      email
+      email,
+      type
     })
 
-    if (res.status === 200) {
+    if (res.data.messageCode === '201') {
       showMessage({
         message: res.data.message,
         type: "success",
+      });
+
+    } else if (res.data.messageCode === '500') {
+      showMessage({
+        message: res.data.error,
+        type: "danger",
       });
     } else {
       showMessage({

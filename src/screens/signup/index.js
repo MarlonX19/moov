@@ -93,15 +93,19 @@ export default function SignUp(props) {
 
 
   function checkEmailExistence() {
+    let type = 'users'
     api.post('/checkEmail', {
-      email
+      email,
+      type
     })
       .then(response => {
-        console.log(response.data)
-        showMessage({
-          message: "Email informado já está cadastrado",
-          type: "info",
-        });
+        if (response.data.messageCode == '200') {
+          showMessage({
+            message: "Email informado já está cadastrado",
+            type: "info",
+          });
+        }
+
       })
       .catch(error => {
         console.log(error)
