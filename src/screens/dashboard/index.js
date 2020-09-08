@@ -32,6 +32,9 @@ export default function Home(props) {
     const [socket, setSocket] = useState(null);
     const { signOut, user } = useContext(AuthContext);
 
+    console.log('====dados do user no dashboard=====');
+    console.log(user);
+
 
 
 
@@ -134,7 +137,9 @@ export default function Home(props) {
     }, [destination])
 
     function handleContinue() {
-        socket.emit('continue', user)
+        props.navigation.navigate('Confirmar', { user, socket, fromTown, 
+            toTown, fromLatitude: location.latitude, fromLongitude: location.longitude,
+            toLatitude: destination.latitude, toLongitude: destination.longitude })
     }
 
 

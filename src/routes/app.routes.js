@@ -10,6 +10,7 @@ import History from '../screens/history';
 import Update from '../screens/update';
 import RequestDetails from '../screens/request';
 import DriverProfile from '../screens/driverProfile';
+import ConfirmRequest from '../screens/confirmRequest';
 
 import DrawerContent from '../components/DrawerContent';
 import CustomDrawerContent from '../components/CustomDrawerContent';
@@ -52,6 +53,22 @@ function HistoryRoot() {
 }
 
 
+function DashboardRoot() {
+  return (
+    <AppStack.Navigator>
+      <AppStack.Screen
+        options={{ headerShown: false }}
+        name="Dashboard"
+        component={Dashboard} />
+      <AppStack.Screen
+        options={{ headerShown: false }}
+        name="Confirmar"
+        component={ConfirmRequest} />
+    </AppStack.Navigator>
+  );
+}
+
+
 const AppDrawer = createDrawerNavigator();
 
 const AppRoutes = () => (
@@ -69,7 +86,7 @@ const AppRoutes = () => (
       itemStyle: { marginVertical: 10 },
     }}
   >
-    <AppDrawer.Screen name="Dashboard" component={Dashboard} />
+    <AppDrawer.Screen name="Dashboard" component={DashboardRoot} />
     <AppDrawer.Screen name="Profile" component={ProfileRoot} />
     <AppDrawer.Screen name="Pagamentos" component={Payments} />
     <AppDrawer.Screen name="Historico" component={HistoryRoot} />
