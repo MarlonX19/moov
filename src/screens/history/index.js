@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 
 import Header from '../../components/Header';
@@ -45,35 +45,44 @@ function History(props) {
   }
 
 
+  function handleSeeDetails() {
+    props.navigation.navigate('Detalhes');
+  }
+
+
   const renderItem = ({ item }) => {
     console.log('=======aqui========');
     console.log(item)
     return (
-      <View style={styles.cardBody}>
-        <View style={styles.cardHead}>
-          <Text style={[styles.headText,
-          {
-            color: item.delivered === 'Concluído' ?
-              'green' :
-              'orange'
-          }]}>{item.delivered ? 'Concluído' : 'em andamento'}</Text>
-          <Text style={styles.headText}>R${parseFloat(item.value).toFixed(2)}</Text>
-        </View>
-        <View style={styles.mainInfo}>
-          <Text style={styles.mainText}>Solicitado em: </Text>
-          <Text style={styles.mainText}>{moment(item.date).format("DD/MM/YYYY")}</Text>
-        </View>
-        <View style={styles.bottomCard}>
-          <View style={styles.fromTown}>
-            <View style={[styles.markerView, { backgroundColor: 'red' }]}></View>
-            <Text style={styles.fromLocationText}>{item.fromTown}</Text>
+      <TouchableOpacity
+        onPress={() => handleSeeDetails()}
+      >
+        <View style={styles.cardBody}>
+          <View style={styles.cardHead}>
+            <Text style={[styles.headText,
+            {
+              color: item.delivered === 'Concluído' ?
+                'green' :
+                'orange'
+            }]}>{item.delivered ? 'Concluído' : 'em andamento'}</Text>
+            <Text style={styles.headText}>R${parseFloat(item.value).toFixed(2)}</Text>
           </View>
-          <View style={styles.toTown}>
-            <View style={[styles.markerView, { backgroundColor: 'green' }]}></View>
-            <Text style={styles.fromLocationText}>{item.toTown}</Text>
+          <View style={styles.mainInfo}>
+            <Text style={styles.mainText}>Solicitado em: </Text>
+            <Text style={styles.mainText}>{moment(item.date).format("DD/MM/YYYY")}</Text>
           </View>
-        </View>
-      </View >
+          <View style={styles.bottomCard}>
+            <View style={styles.fromTown}>
+              <View style={[styles.markerView, { backgroundColor: 'red' }]}></View>
+              <Text style={styles.fromLocationText}>{item.fromTown}</Text>
+            </View>
+            <View style={styles.toTown}>
+              <View style={[styles.markerView, { backgroundColor: 'green' }]}></View>
+              <Text style={styles.fromLocationText}>{item.toTown}</Text>
+            </View>
+          </View>
+        </View >
+      </TouchableOpacity>
     )
   }
 

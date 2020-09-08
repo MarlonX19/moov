@@ -1,12 +1,22 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
-function Request() {
+function Request(props) {
+
+
+  function handleSeeDetails() {
+    props.navigation.navigate('Detalhes');
+  }
+
   return (
     <View>
-      <Text>ola request</Text>
+      <TouchableOpacity
+        onPress={() => handleSeeDetails()}
+      >
+        <Text>ola request</Text>
+      </TouchableOpacity>
     </View>
   )
 }

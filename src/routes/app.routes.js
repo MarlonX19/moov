@@ -8,6 +8,7 @@ import Profile from '../screens/profile';
 import Payments from '../screens/payments';
 import History from '../screens/history';
 import Update from '../screens/update';
+import RequestDetails from '../screens/request';
 
 import DrawerContent from '../components/DrawerContent';
 import CustomDrawerContent from '../components/CustomDrawerContent';
@@ -25,6 +26,22 @@ function ProfileRoot() {
         options={{ headerShown: false }}
         name="Atualizar"
         component={Update} />
+    </AppStack.Navigator>
+  );
+}
+
+
+function HistoryRoot() {
+  return (
+    <AppStack.Navigator>
+      <AppStack.Screen
+        options={{ headerShown: false }}
+        name="Historico"
+        component={History} />
+      <AppStack.Screen
+        options={{ headerShown: false }}
+        name="Detalhes"
+        component={RequestDetails} />
     </AppStack.Navigator>
   );
 }
@@ -50,7 +67,7 @@ const AppRoutes = () => (
     <AppDrawer.Screen name="Dashboard" component={Dashboard} />
     <AppDrawer.Screen name="Profile" component={ProfileRoot} />
     <AppDrawer.Screen name="Pagamentos" component={Payments} />
-    <AppDrawer.Screen name="Historico" component={History} />
+    <AppDrawer.Screen name="Historico" component={HistoryRoot} />
     <AppDrawer.Screen name="Ajuda" component={Help} />
   </AppDrawer.Navigator>
 )
