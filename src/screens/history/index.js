@@ -45,8 +45,8 @@ function History(props) {
   }
 
 
-  function handleSeeDetails() {
-    props.navigation.navigate('Detalhes');
+  function handleSeeDetails(ride) {
+    props.navigation.navigate('Detalhes', { ride });
   }
 
 
@@ -55,7 +55,7 @@ function History(props) {
     console.log(item)
     return (
       <TouchableOpacity
-        onPress={() => handleSeeDetails()}
+        onPress={() => handleSeeDetails(item)}
       >
         <View style={styles.cardBody}>
           <View style={styles.cardHead}>
