@@ -59,6 +59,8 @@ function History(props) {
 
 
   const renderItem = ({ item }) => {
+    console.log('item aqui');
+    console.log(item)
     return (
       <TouchableOpacity
         onPress={() => handleSeeDetails(item)}

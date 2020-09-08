@@ -62,8 +62,8 @@ function Request(props) {
         >
           <>
             <MapViewDirections
-              origin={{ "latitude": -22.5838264, "longitude": -47.40976949999999 }}
-              destination={{ "latitude": -23.9549113, "longitude": -46.3796944 }}
+              origin={{ "latitude": parseFloat(ride.fromLatitude), "longitude": parseFloat(ride.fromLongitude) }}
+              destination={{ "latitude": parseFloat(ride.toLatitude), "longitude": parseFloat(ride.toLongitude) }}
               apikey={GOOGLE_PLACES_API_KEY}
               strokeWidth={3}
               strokeColor='purple'
@@ -76,14 +76,14 @@ function Request(props) {
               isPreselected
               onPress={e => console.log(e.nativeEvent)}
               draggable
-              coordinate={{ "latitude": -22.5838264, "longitude": -47.40976949999999 }}
+              coordinate={{ "latitude": parseFloat(ride.fromLatitude), "longitude": parseFloat(ride.fromLongitude) }}
               image={startMarker}
             >
             </Marker>
             <Marker
               title='ponto de entrega'
               isPreselected={true}
-              coordinate={{ "latitude": -23.9549113, "longitude": -46.3796944 }}
+              coordinate={{ "latitude": parseFloat(ride.toLatitude), "longitude": parseFloat(ride.toLongitude) }}
               image={finishMarker}
             >
             </Marker>
