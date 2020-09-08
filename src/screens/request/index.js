@@ -20,7 +20,6 @@ import styles from './styles';
 
 function Request(props) {
   const { ride } = props.route.params;
-  console.log(ride)
   const [driverData, setDriverData] = useState({});
 
 
@@ -36,10 +35,10 @@ function Request(props) {
     loadDriverInfo()
   }, [])
 
-function handleSeeDriverProfile(){
-  props.navigation.navigate('PerfilMotorista');
-  
-}
+  function handleSeeDriverProfile() {
+    props.navigation.navigate('PerfilMotorista', { driverData });
+
+  }
 
 
   return (
