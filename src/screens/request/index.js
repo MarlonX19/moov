@@ -36,10 +36,10 @@ function Request(props) {
     loadDriverInfo()
   }, [])
 
-  useEffect(() => {
-    console.log('driverData')
-    console.log(driverData)
-  }, [driverData])
+function handleSeeDriverProfile(){
+  props.navigation.navigate('PerfilMotorista');
+  
+}
 
 
   return (
@@ -113,12 +113,16 @@ function Request(props) {
         <View style={styles.driverView}>
           <View style={styles.driverInnerView}>
             <Image source={{ uri: `http://192.168.15.13:3000/files/${driverData.avatar_path}` }} style={{ width: 85, height: 85, borderRadius: 50 }} />
-            <Text style={[styles.driverText, { fontSize: 18}]}>{`${driverData.first_name} ${driverData.last_name}`}</Text>
+            <Text style={[styles.driverText, { fontSize: 18 }]}>{`${driverData.first_name} ${driverData.last_name}`}</Text>
           </View>
-          <View style={styles.driverInnerView}>
-            <Text style={[styles.driverText, { color: '#FA960F'}]}>Ver perfil</Text>
-            <Icon name="arrow-right" size={22} color="#FA960F" />
-          </View>
+          <TouchableOpacity
+            onPress={() => handleSeeDriverProfile()}
+          >
+            <View style={styles.driverInnerView}>
+              <Text style={[styles.driverText, { color: '#FA960F' }]}>Ver perfil</Text>
+              <Icon name="arrow-right" size={22} color="#FA960F" />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

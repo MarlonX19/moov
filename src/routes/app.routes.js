@@ -9,6 +9,7 @@ import Payments from '../screens/payments';
 import History from '../screens/history';
 import Update from '../screens/update';
 import RequestDetails from '../screens/request';
+import DriverProfile from '../screens/driverProfile';
 
 import DrawerContent from '../components/DrawerContent';
 import CustomDrawerContent from '../components/CustomDrawerContent';
@@ -42,6 +43,10 @@ function HistoryRoot() {
         options={{ headerShown: false }}
         name="Detalhes"
         component={RequestDetails} />
+      <AppStack.Screen
+        options={{ headerShown: false }}
+        name="PerfilMotorista"
+        component={DriverProfile} />
     </AppStack.Navigator>
   );
 }
