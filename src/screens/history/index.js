@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, Image, ActivityIndicator } from 'react-native';
+import moment from 'moment';
 
 import Header from '../../components/Header';
 
@@ -21,6 +22,7 @@ function History(props) {
     const response = await api.post('/user/deliveries', { user_id, type })
 
     if (response.data.messageCode == '200') {
+      console.log(response.data.response)
       setDeliveries(response.data.response);
       setLoading(false);
     } else {
@@ -43,13 +45,53 @@ function History(props) {
   }
 
 
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.cardBody}>
+        <View style={styles.cardHead}>
+          <Text style={[styles.headText,
+          {
+            color: item.delivered === 'Concluído' ?
+              'green' :
+              'orange'
+          }]}>{item.delivered ? 'Concluído' : 'em andamento'}</Text>
+          <Text style={styles.headText}>R${parseFloat(item.value).toFixed(2)}</Text>
+        </View>
+        <View style={styles.mainInfo}>
+          <Text style={styles.mainText}>Solicitado em: </Text>
+          <Text style={styles.mainText}>{moment(item.date).format("DD/MM/YYYY")}</Text>
+        </View>
+        <View style={styles.bottomCard}>
+          <View style={styles.fromTown}>
+            <View style={[styles.markerView, { backgroundColor: 'red' }]}></View>
+            <Text style={styles.fromLocationText}>{item.fromTown}</Text>
+          </View>
+          <View style={styles.toTown}>
+            <View style={[styles.markerView, { backgroundColor: 'green' }]}></View>
+            <Text style={styles.fromLocationText}>{item.toTown}</Text>
+          </View>
+        </View>
+      </View >
+    )
+  }
+
+
   return (
     <View style={styles.container}>
       <Header head='Histórico' navigation={props.navigation} />
-      <View style={styles.NoRides}>
-        <Image source={NoRide} style={{ width: 150, height: 150 }} />
-        <Text style={styles.NoRidesText}>Nada para mostrar</Text>
-      </View>
+      {
+        deliveries.length < 1 ?
+          <View style={styles.NoRides}>
+            <Image source={NoRide} style={{ width: 150, height: 150 }} />
+            <Text style={styles.NoRidesText}>Nada para mostrar</Text>
+          </View> :
+          <FlatList
+            data={deliveries}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index}
+          />
+      }
+
     </View>
   )
 }

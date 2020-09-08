@@ -25,6 +25,8 @@ import styles from './styles';
 
 export default function Home(props) {
     const [location, setLocation] = useState({});
+    const [fromTown, setFromTown] = useState('');
+    const [toTown, setToTown] = useState('');
     const [destination, setDestination] = useState({});
     const [distanceBetween, setDistanceBetween] = useState('');
     const [socket, setSocket] = useState(null);
@@ -36,6 +38,11 @@ export default function Home(props) {
     function handleSignOut() {
         signOut();
     }
+
+
+    useEffect(() => {
+        console.log(destination)
+    }, [destination])
 
     async function getLocation() {
         try {
@@ -72,11 +79,13 @@ export default function Home(props) {
 
     const handleLocationSelected = async (data, { geometry }) => {
         const { location } = geometry;
+        setFromTown(data.description);
         setLocation({ 'latitude': location.lat, 'longitude': location.lng })
     }
 
     const handleDestinationSelected = async (data, { geometry }) => {
         const { location } = geometry;
+        setToTown(data.description);
         setDestination({ 'latitude': location.lat, 'longitude': location.lng });
 
     }
@@ -156,7 +165,7 @@ export default function Home(props) {
                         <MapViewDirections
                             origin={location}
                             destination={destination}
-                            apikey= {GOOGLE_PLACES_API_KEY}
+                            apikey={GOOGLE_PLACES_API_KEY}
                             strokeWidth={3}
                             strokeColor='purple'
                             mode='DRIVING'
