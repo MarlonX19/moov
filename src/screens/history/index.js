@@ -46,6 +46,8 @@ function History(props) {
 
 
   const renderItem = ({ item }) => {
+    console.log('=======aqui========');
+    console.log(item)
     return (
       <View style={styles.cardBody}>
         <View style={styles.cardHead}>
