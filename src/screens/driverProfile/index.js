@@ -9,8 +9,6 @@ import styles from './styles';
 
 function DriverProfile(props) {
   const { driverData } = props.route.params;
-  console.log('driver info is here')
-  console.log(driverData)
 
   return (
     <View style={styles.container}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, FlatList, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 
@@ -7,18 +7,23 @@ import Header from '../../components/Header';
 import NoRide from '../../assets/no-rides.png';
 import { api } from '../../services/auth';
 
+import AuthContext from '../../contexts/auth';
+
 import styles from './styles';
 
 function History(props) {
+  const { user } = useContext(AuthContext);
+
   const [deliveries, setDeliveries] = useState([]);
-  const [user_id, setUserId] = useState(1);
+  const [user_id, setUserId] = useState(user.id);
   const [loading, setLoading] = useState(true);
+
+  
 
 
   async function fetchDeliveries() {
     setLoading(true);
     let type = 'users';
-    let user_id = 1;
     const response = await api.post('/user/deliveries', { user_id, type })
 
     if (response.data.messageCode == '200') {
@@ -32,8 +37,11 @@ function History(props) {
 
 
   useEffect(() => {
-    fetchDeliveries();
-  }, [])
+    props.navigation.addListener('focus', () => {
+      fetchDeliveries();
+    });
+
+  }, [props.navigation]);
 
 
   if (loading) {
@@ -51,8 +59,6 @@ function History(props) {
 
 
   const renderItem = ({ item }) => {
-    console.log('=======aqui========');
-    console.log(item)
     return (
       <TouchableOpacity
         onPress={() => handleSeeDetails(item)}
