@@ -16,7 +16,7 @@ function DriverProfile(props) {
   let { driverData } = props.route.params;
   const [modalVisible, setModalVisible] = useState(false);
   const [number_stars, setNumberStars] = useState(1);
-
+  
 
   async function handleRateUser() {
     setModalVisible(false);
