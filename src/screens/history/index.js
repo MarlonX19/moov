@@ -15,7 +15,6 @@ function History(props) {
   const { user } = useContext(AuthContext);
 
   const [deliveries, setDeliveries] = useState([]);
-  const [user_id, setUserId] = useState(user.id);
   const [loading, setLoading] = useState(true);
 
   
@@ -24,7 +23,7 @@ function History(props) {
   async function fetchDeliveries() {
     setLoading(true);
     let type = 'users';
-    const response = await api.post('/user/deliveries', { user_id, type })
+    const response = await api.post('/user/deliveries', { user_id: user.id, type })
 
     if (response.data.messageCode == '200') {
       console.log(response.data.response)

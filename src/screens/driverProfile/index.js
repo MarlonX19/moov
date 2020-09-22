@@ -5,6 +5,8 @@ import StarRating from 'react-native-star-rating';
 
 import Header from '../../components/Header';
 
+import { BASE_URL } from '../../../constants';
+
 import styles from './styles';
 
 function DriverProfile(props) {
@@ -15,10 +17,10 @@ function DriverProfile(props) {
       <Header head='Perfil do motorista' navigation={props.navigation} />
       <View style={styles.topView}>
         <View style={{ width: '100%', height: 200 }}>
-          <Image source={{ uri: `http://192.168.15.13:3000/files/${driverData.avatar_path}` }} style={{ width: '100%', height: '100%' }} />
+          <Image source={{ uri: `${BASE_URL}/files/${driverData.avatar_path}` }} style={{ width: '100%', height: '100%' }} />
         </View>
         <View style={styles.avatarView}>
-          <Image source={{ uri: `http://192.168.15.13:3000/files/${driverData.avatar_path}` }} style={styles.profilePic} />
+          <Image source={{ uri: `${BASE_URL}/files/${driverData.avatar_path}` }} style={styles.profilePic} />
           <Text style={styles.avatarText}>{`${driverData.first_name} ${driverData.last_name}`}</Text>
           <StarRating
             disabled={false}

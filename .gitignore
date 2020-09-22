@@ -61,3 +61,6 @@ buck-out/
 
 #Environment
 .env
+
+
+constants.js

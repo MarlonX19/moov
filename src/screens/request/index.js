@@ -11,6 +11,7 @@ import moment from 'moment';
 import finishMarker from '../../assets/finish.png';
 import startMarker from '../../assets/start.png';
 
+import { BASE_URL } from '../../../constants';
 
 import Header from '../../components/Header';
 
@@ -111,7 +112,7 @@ function Request(props) {
         </View>
         <View style={styles.driverView}>
           <View style={styles.driverInnerView}>
-            <Image source={{ uri: `http://192.168.15.13:3000/files/${driverData.avatar_path}` }} style={{ width: 85, height: 85, borderRadius: 50 }} />
+            <Image source={{ uri: `${BASE_URL}/files/${driverData.avatar_path}` }} style={{ width: 85, height: 85, borderRadius: 50 }} />
             <Text style={[styles.driverText, { fontSize: 18 }]}>{`${driverData.first_name} ${driverData.last_name}`}</Text>
           </View>
           <TouchableOpacity

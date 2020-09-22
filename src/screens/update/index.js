@@ -5,6 +5,8 @@ import { showMessage } from 'react-native-flash-message';
 
 import Header from '../../components/Header';
 
+import { BASE_URL } from '../../../constants';
+
 import AuthContext from '../../contexts/auth';
 
 import styles from './styles';
@@ -18,7 +20,7 @@ function Update(props) {
 
   useEffect(() => {
     if (user?.avatar_path) {
-      setNewPic(`http://192.168.15.13:3000/files/${user.avatar_path}`)
+      setNewPic(`${BASE_URL}/files/${user.avatar_path}`)
     }
   }, [])
 
