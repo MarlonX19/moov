@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Image, Modal, TouchableHighlight } from 'react-native';
 import moment from 'moment';
 
 import Header from '../../components/Header';
 
+import ConfirmImage from '../../assets/confirm.png';
+
 import styles from './styles';
 
 function ConfirmRequest(props) {
+  const [modalVisible, setModalVisible] = useState(false);
   const [value, setValue] = useState('');
   const [observation, setObservation] = useState('');
 
@@ -22,11 +25,13 @@ function ConfirmRequest(props) {
   function handleSearch() {
     let now = moment().valueOf().toString();
 
-    socket.emit('continue', {
-      user, value, fromTown, toTown,
-      fromLatitude, fromLongitude, toLatitude,
-      toLongitude, observation, date: now
-    })
+    setModalVisible(true);
+
+    // socket.emit('continue', {
+    //   user, value, fromTown, toTown,
+    //   fromLatitude, fromLongitude, toLatitude,
+    //   toLongitude, observation, date: now
+    // })
 
   }
 
@@ -57,12 +62,44 @@ function ConfirmRequest(props) {
           value={observation}
         />
       </View>
+      <View style={styles.iconView}>
+        <Image style={{ width: 200, height: 150 }} source={ConfirmImage} />
+      </View>
       <TouchableOpacity
         onPress={() => handleSearch()}
         style={styles.searchButton}
       >
         <Text style={styles.buttonText}>Confirmar e buscar entregador</Text>
       </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        style={{ backgroundColor: 'red', flex: 1 }}
+        onRequestClose={() => {
+          console.log("Modal has been closed.");
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View style={styles.rateView}>
+              <Text style={styles.modalText}>Avalie o seu cliente</Text>
+
+            </View>
+            <TouchableHighlight
+              style={{ ...styles.openButton }}
+              onPress={() => {
+                handleRateUser();
+              }}
+            >
+              <Text style={styles.textStyle}>Avaliar</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+
+
     </View>
   )
 }
