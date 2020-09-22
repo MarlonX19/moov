@@ -35,9 +35,6 @@ export default function Home(props) {
     console.log('====dados do user no dashboard=====');
     console.log(user);
 
-
-
-
     function handleSignOut() {
         signOut();
     }
@@ -113,7 +110,7 @@ export default function Home(props) {
     useEffect(() => {
         getLocation()
 
-        let skt = io('http://192.168.15.13:3000/usuarios')
+        let skt = io('https://moov-back-end.herokuapp.com/usuarios')
         setSocket(skt);
 
     }, [])
@@ -137,9 +134,13 @@ export default function Home(props) {
     }, [destination])
 
     function handleContinue() {
-        props.navigation.navigate('Confirmar', { user, socket, fromTown, 
+        props.navigation.navigate('Confirmar', {
+            user, socket, fromTown,
             toTown, fromLatitude: location.latitude, fromLongitude: location.longitude,
-            toLatitude: destination.latitude, toLongitude: destination.longitude })
+            toLatitude: destination.latitude, toLongitude: destination.longitude
+        })
+
+        resetSearch();
     }
 
 

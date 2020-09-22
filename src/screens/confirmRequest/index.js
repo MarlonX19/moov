@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Image, Modal, TouchableHighlight } from 'react-native';
 import moment from 'moment';
+import {
+  DotIndicator,
+} from 'react-native-indicators';
 
 import Header from '../../components/Header';
 
@@ -25,14 +28,19 @@ function ConfirmRequest(props) {
   function handleSearch() {
     let now = moment().valueOf().toString();
 
+    socket.emit('continue', {
+      user, value, fromTown, toTown,
+      fromLatitude, fromLongitude, toLatitude,
+      toLongitude, observation, date: now
+    })
+
     setModalVisible(true);
 
-    // socket.emit('continue', {
-    //   user, value, fromTown, toTown,
-    //   fromLatitude, fromLongitude, toLatitude,
-    //   toLongitude, observation, date: now
-    // })
+  }
 
+  function handleSeeHistory(){
+    setModalVisible(false);
+    props.navigation.navigate('Historico');
   }
 
 
@@ -83,18 +91,16 @@ function ConfirmRequest(props) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View style={styles.rateView}>
-              <Text style={styles.modalText}>Avalie o seu cliente</Text>
-
+            <Text style={styles.modalText}>Tudo pronto! Agora é só esperar!</Text>
+            <DotIndicator color='black' />
+            <View>
+              <TouchableOpacity
+                onPress={() => handleSeeHistory()}
+                style={[styles.searchButton, { width: 200, alignSelf: 'center', borderRadius: 4 }]}
+              >
+                <Text style={styles.buttonText}>Acompanhar andamento</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableHighlight
-              style={{ ...styles.openButton }}
-              onPress={() => {
-                handleRateUser();
-              }}
-            >
-              <Text style={styles.textStyle}>Avaliar</Text>
-            </TouchableHighlight>
           </View>
         </View>
       </Modal>

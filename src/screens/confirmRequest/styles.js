@@ -48,10 +48,10 @@ const styles  = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)'
   },
   modalView: {
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 8,
-    padding: 35,
+    padding: 20,
+    justifyContent: 'space-evenly',
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -60,7 +60,10 @@ const styles  = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
+    width: '80%', 
+    height: 300, 
+    alignSelf: 'center',
   },
   openButton: {
     backgroundColor: "black",
@@ -75,15 +78,10 @@ const styles  = StyleSheet.create({
     fontFamily: 'sans-serif-thin'
   },
   modalText: {
-    marginBottom: 15,
     textAlign: "center",
     fontSize: 20,
     fontFamily: 'sans-serif-thin'
   },
-
-  rateView: {
-    marginBottom: 20,
-  }
 
 })
 
