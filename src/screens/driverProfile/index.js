@@ -1,16 +1,38 @@
-import React from 'react';
-import { View, Text, Image, Linking, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, Linking, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StarRating from 'react-native-star-rating';
+import { showMessage } from "react-native-flash-message";
 
 import Header from '../../components/Header';
+
+import { api } from '../../services/auth';
 
 import { BASE_URL } from '../../../constants';
 
 import styles from './styles';
 
 function DriverProfile(props) {
-  const { driverData } = props.route.params;
+  let { driverData } = props.route.params;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [number_stars, setNumberStars] = useState(1);
+
+
+  async function handleRateUser() {
+    setModalVisible(false);
+    console.log('driver data');
+    console.log(driverData);
+    driverData = { ...driverData, number_stars }
+    const response = await api.put('/drivers', { driverData })
+
+    if (response.data.messageCode === '200') {
+      showMessage({
+        message: "Avaliação dada com sucesso!",
+        type: "success",
+      });
+    }
+    
+  }
 
   return (
     <View style={styles.container}>
@@ -25,10 +47,10 @@ function DriverProfile(props) {
           <StarRating
             disabled={false}
             maxStars={5}
-            rating={4}
+            rating={driverData.number_stars}
             starSize={18}
             fullStarColor={'#FA960F'}
-            selectedStar={(rating) => { }}
+            selectedStar={(rating) => {}}
           />
         </View>
         <View style={styles.contactView}>
@@ -51,7 +73,7 @@ function DriverProfile(props) {
             </>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => Linking.openURL(`tel:${driverData.phone}`)}
+            onPress={() => setModalVisible(true)}
             style={styles.callButton}
           >
             <>
@@ -61,6 +83,41 @@ function DriverProfile(props) {
           </TouchableOpacity>
         </View>
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        style={{ backgroundColor: 'red', flex: 1 }}
+        onRequestClose={() => {
+          console.log("Modal has been closed.");
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View style={styles.rateView}>
+              <Text style={styles.modalText}>Avalie o seu cliente</Text>
+              <StarRating
+                disabled={false}
+                maxStars={5}
+                rating={number_stars}
+                starSize={40}
+                fullStarColor={'#FA960F'}
+                selectedStar={(rating) => setNumberStars(rating)}
+              />
+            </View>
+            <TouchableHighlight
+              style={{ ...styles.openButton }}
+              onPress={() => {
+                handleRateUser();
+              }}
+            >
+              <Text style={styles.textStyle}>Avaliar</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+
     </View>
   )
 }
