@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, StatusBar, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
@@ -19,15 +19,13 @@ export default function SignUp(props) {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [number_starts, setNumber_starts] = useState(5);
-  const [push_id, setPush_id] = useState('eeeeepppppoooowwwww');
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [image, setImage] = useState('https://www.gravatar.com/avatar/?d=retro');
-  const { signed, signIn } = useContext(AuthContext);
+  const { signed, signIn, push_id_player } = useContext(AuthContext);
 
   const nav = useNavigation();
-
 
   function _hasErrors() {
     return !email.includes('@');
@@ -66,8 +64,8 @@ export default function SignUp(props) {
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("password", password);
+    formData.append("push_id", push_id_player);
     formData.append("number_starts", number_starts);
-    formData.append("push_id", push_id);
     formData.append("document", cpf);
 
 
@@ -79,7 +77,7 @@ export default function SignUp(props) {
 
     api.post("/users", formData, options)
       .then(function (response) {
-        console.log(response);
+        console.log(response.data);
         nav.navigate('Welcome');
       })
       .catch(function (error) {

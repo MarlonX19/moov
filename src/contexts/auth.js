@@ -10,6 +10,12 @@ const AuthContext = createContext({ signed: false, user: {} });
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [push_id_player, setPushIdPlayer] = useState('');
+
+
+  function setPushId(id){
+    setPushIdPlayer(id)
+  }
 
 
   useEffect(() => {
@@ -110,7 +116,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading, updateUser, updateUserPhoto }} >
+    <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading, updateUser, updateUserPhoto, setPushId, push_id_player }} >
       {children}
     </AuthContext.Provider>
   )

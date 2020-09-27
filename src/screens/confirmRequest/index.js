@@ -36,11 +36,11 @@ function ConfirmRequest(props) {
 
     setModalVisible(true);
 
-  }
+    setTimeout(() => {
+      setModalVisible(false);
+      props.navigation.navigate('Historico');
+    }, 3000);
 
-  function handleSeeHistory(){
-    setModalVisible(false);
-    props.navigation.navigate('Historico');
   }
 
 
@@ -91,20 +91,11 @@ function ConfirmRequest(props) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Tudo pronto! Agora é só esperar!</Text>
+            <Text style={styles.modalText}>Tudo pronto! Pedido enviado aos motoristas!</Text>
             <DotIndicator color='black' />
-            <View>
-              <TouchableOpacity
-                onPress={() => handleSeeHistory()}
-                style={[styles.searchButton, { width: 200, alignSelf: 'center', borderRadius: 4 }]}
-              >
-                <Text style={styles.buttonText}>Acompanhar andamento</Text>
-              </TouchableOpacity>
-            </View>
           </View>
         </View>
       </Modal>
-
 
     </View>
   )
