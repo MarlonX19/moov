@@ -87,6 +87,7 @@ export const AuthProvider = ({ children }) => {
 
     return api.put("/userPhoto", formData, options)
       .then(async function (response) {
+        console.log('response.data[0] foto atualizada');
         console.log(response.data[0]);
         try {
           await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data[0]));
@@ -94,6 +95,7 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
           console.log(error);
         }
+        setUser(response.data[0]);
         return { message: 'updated' }
 
       })

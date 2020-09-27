@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image } from 'react-native';
 import StarRating from 'react-native-star-rating';
 
