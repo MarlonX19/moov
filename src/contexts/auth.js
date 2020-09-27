@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
       const storageUser = await AsyncStorage.getItem('@RNAuth:user');
       const storageToken = await AsyncStorage.getItem('@RNAuth:token');
 
+
       if (storageUser && storageToken) {
         setUser(JSON.parse(storageUser));
         setLoading(false);
@@ -39,9 +40,6 @@ export const AuthProvider = ({ children }) => {
 
     return api.post("/login", { email, password })
       .then(async response => {
-        console.log('response aqui')
-        console.log(response.data[0].push_id)
-        console.log(response.data[0])
         try {
           await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data[0]));
           await AsyncStorage.setItem('@RNAuth:token', response.data[0].push_id);
@@ -63,15 +61,13 @@ export const AuthProvider = ({ children }) => {
   async function updateUser(userData) {
     return api.put("/users", { userData })
       .then(async response => {
-        console.log('========response da atualização aqui=======')
-        console.log(response.data[0])
         try {
-          await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data[0]));
-          await AsyncStorage.setItem('@RNAuth:token', response.data[0].push_id);
+          await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data.response[0]));
+          await AsyncStorage.setItem('@RNAuth:token', response.data.response[0].push_id);
         } catch (error) {
           console.log(error);
         }
-        setUser(response.data[0]);
+        setUser(response.data.response[0]);
         return { message: 'updated' }
       })
       .catch((error) => {

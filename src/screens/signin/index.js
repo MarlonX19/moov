@@ -37,6 +37,7 @@ export default function SignIn(props) {
         <TextInput
           style={styles.input}
           placeholder='Email'
+          autoCapitalize='none'
           textContentType='emailAddress'
           placeholderTextColor='#ddd'
           onChangeText={text => setEmail(text)}
