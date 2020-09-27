@@ -16,9 +16,7 @@ function History(props) {
 
   const [deliveries, setDeliveries] = useState([]);
   const [loading, setLoading] = useState(true);
-
   
-
 
   async function fetchDeliveries() {
     setLoading(true);
@@ -27,7 +25,7 @@ function History(props) {
 
     if (response.data.messageCode == '200') {
       response.data.response.sort(function(a,b){
-        return new Date(b.date) - new Date(a.date);
+        return new Date(a.date) - new Date(b.date);
       });
       setDeliveries(response.data.response);
       setLoading(false);
@@ -59,21 +57,37 @@ function History(props) {
   }
 
 
+  function generateStatus(item){
+    if(item.canceled){
+      return 'cancelado';
+    }
+
+    if(item.delivered){
+      return 'concluído';
+    }
+
+    if(item.accepted && !item.delivered){
+      return 'em andamento';
+    }
+  }
+
+
   const renderItem = ({ item }) => {
     console.log('item aqui');
     console.log(item)
     return (
       <TouchableOpacity
         onPress={() => handleSeeDetails(item)}
+        disabled={item.canceled}
       >
         <View style={styles.cardBody}>
           <View style={styles.cardHead}>
             <Text style={[styles.headText,
             {
-              color: item.delivered === 'Concluído' ?
+              color: item.delivered ?
                 'green' :
                 'orange'
-            }]}>{item.delivered ? 'Concluído' : 'em andamento'}</Text>
+            }]}>{generateStatus(item)}</Text>
             <Text style={styles.headText}>R${parseFloat(item.value).toFixed(2)}</Text>
           </View>
           <View style={styles.mainInfo}>

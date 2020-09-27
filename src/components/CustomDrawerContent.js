@@ -25,7 +25,7 @@ function CustomDrawerContent(props) {
           <StarRating
             disabled={false}
             maxStars={5}
-            rating={5}
+            rating={user.number_starts}
             starSize={25}
             fullStarColor={'#FA960F'}
             selectedStar={(rating) => { }}
