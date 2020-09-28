@@ -25,7 +25,7 @@ function History(props) {
 
     if (response.data.messageCode == '200') {
       response.data.response.sort(function(a,b){
-        return new Date(a.date) - new Date(b.date);
+        return new Date(b.date) - new Date(a.date);
       });
       setDeliveries(response.data.response);
       setLoading(false);
@@ -68,6 +68,10 @@ function History(props) {
 
     if(item.accepted && !item.delivered){
       return 'em andamento';
+    }
+
+    if(!item.accepted && !item.delivered){
+      return 'aguardando';
     }
   }
 

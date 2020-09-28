@@ -110,7 +110,7 @@ export default function Home(props) {
     useEffect(() => {
         getLocation()
 
-        let skt = io('https://moov-back-end.herokuapp.com/usuarios')
+        let skt = io('http://192.168.15.15:3000/usuarios')
         setSocket(skt);
 
     }, [])

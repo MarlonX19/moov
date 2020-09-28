@@ -96,9 +96,15 @@ function Request(props) {
           <Text style={styles.topTextDetails}>{moment(ride.date).format("DD/MM/YYYY hh:mm")}</Text>
           <Text style={styles.topTextDetails}>R${parseFloat(ride.value).toFixed(2)}</Text>
         </View>
-        <View style={styles.topViewDetails}>
-          <Text style={styles.topTextDelivered}>Entrega concluída em: </Text>
-          <Text style={styles.topTextDelivered}> {moment(ride.delivered_at).format("DD/MM/YYYY hh:mm")}</Text>
+        <View>
+          {
+            ride.delivered_at ?
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Text style={styles.topTextDelivered}>Entrega concluída em: </Text>
+                <Text style={styles.topTextDelivered}>{moment(ride.delivered_at).format("DD/MM/YYYY hh:mm")}</Text>
+              </View> :
+              <View />
+          }
         </View>
         <View style={styles.bottomCard}>
           <View style={styles.fromTown}>
@@ -111,18 +117,27 @@ function Request(props) {
           </View>
         </View>
         <View style={styles.driverView}>
-          <View style={styles.driverInnerView}>
-            <Image source={{ uri: `${BASE_URL}/files/${driverData.avatar_path}` }} style={{ width: 85, height: 85, borderRadius: 50 }} />
-            <Text style={[styles.driverText, { fontSize: 18 }]}>{`${driverData.first_name} ${driverData.last_name}`}</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => handleSeeDriverProfile()}
-          >
-            <View style={styles.driverInnerView}>
-              <Text style={[styles.driverText, { color: '#FA960F' }]}>Ver perfil</Text>
-              <Icon name="arrow-right" size={22} color="#FA960F" />
-            </View>
-          </TouchableOpacity>
+          {
+            Object.values(driverData).length > 0 ?
+              <>
+                <View style={styles.driverInnerView}>
+                  <Image source={{ uri: `${BASE_URL}/files/${driverData.avatar_path}` }} style={{ width: 85, height: 85, borderRadius: 50 }} />
+                  <Text style={[styles.driverText, { fontSize: 18 }]}>{`${driverData.first_name} ${driverData.last_name}`}</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() => handleSeeDriverProfile()}
+                >
+                  <View style={styles.driverInnerView}>
+                    <Text style={[styles.driverText, { color: '#FA960F' }]}>Ver perfil</Text>
+                    <Icon name="arrow-right" size={22} color="#FA960F" />
+                  </View>
+                </TouchableOpacity>
+              </> :
+              <View style={styles.noAnswerView}> 
+                <Text style={styles.noAnswer}>Ninguém aceitou fazer sua entrega ainda :(</Text>
+              </View>
+          }
+
         </View>
       </View>
     </View>

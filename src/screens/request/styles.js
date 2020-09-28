@@ -75,6 +75,18 @@ const styles = StyleSheet.create({
   driverText: {
     marginHorizontal: 5,
     color: '#696969'
+  },
+
+  noAnswerView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  noAnswer: {
+    fontSize: 24, 
+    color: 'grey',
+    fontFamily: 'sans-serif-thin',
+    textAlign: 'center',
   }
 
 })

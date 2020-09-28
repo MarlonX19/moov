@@ -5,6 +5,8 @@ import {
   DotIndicator,
 } from 'react-native-indicators';
 
+import { api } from '../../services/auth';
+
 import Header from '../../components/Header';
 
 import ConfirmImage from '../../assets/confirm.png';
@@ -25,7 +27,7 @@ function ConfirmRequest(props) {
   }
 
 
-  function handleSearch() {
+  async function handleSearch() {
     let now = moment().valueOf().toString();
 
     socket.emit('continue', {
@@ -35,6 +37,25 @@ function ConfirmRequest(props) {
     })
 
     setModalVisible(true);
+
+    const response = await api.post('/delivery', {
+      accepted: false,
+      delivered: false,
+      value: value,
+      observation: observation,
+      fromLatitude: fromLatitude,
+      fromLongitude: fromLongitude,
+      toLatitude: toLatitude,
+      toLongitude: toLongitude,
+      fromTown: fromTown,
+      toTown: toTown,
+      delivered_at: null,
+      date: now,
+      driver_id: null,
+      user_id: user.id,
+    })
+
+    console.log(response);
 
     setTimeout(() => {
       setModalVisible(false);
