@@ -22,7 +22,7 @@ function History(props) {
     setLoading(true);
     let type = 'users';
     const response = await api.post('/user/deliveries', { user_id: user.id, type })
-
+    console.log(response.data)
     if (response.data.messageCode == '200') {
       response.data.response.sort(function(a,b){
         return new Date(b.date) - new Date(a.date);

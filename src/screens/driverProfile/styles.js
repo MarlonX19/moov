@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     color: '#696969',
   },
 
-  contactView:{
+  contactView: {
     width: '100%',
     height: 200,
     marginTop: 2,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
 
 
-  
+
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -88,6 +88,49 @@ const styles = StyleSheet.create({
 
   rateView: {
     marginBottom: 20,
+  },
+
+  commentRate: {
+    color: 'grey',
+    fontSize: 12,
+  },
+
+  viewComment: {
+    width: 220,
+    height: '90%',
+    backgroundColor: '#fff',
+    marginHorizontal: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 10,
+
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 15,
+
+  },
+
+  commentRateCard: {
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start'
+  },
+
+  commentStyle: {
+    color: '#4a4a4a',
+    fontSize: 13,
   }
 
 })

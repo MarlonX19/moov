@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Image, Linking, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, Linking, TouchableOpacity, Modal, FlatList,Alert, TouchableHighlight, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StarRating from 'react-native-star-rating';
 import { showMessage } from "react-native-flash-message";
@@ -16,9 +16,15 @@ function DriverProfile(props) {
   let { driverData } = props.route.params;
   const [modalVisible, setModalVisible] = useState(false);
   const [number_stars, setNumberStars] = useState(1);
-  
+  const [commentRate, setCommentRate] = useState('');
+  const [comments, setComments] = useState([]);
+
 
   async function handleRateUser() {
+    if(commentRate.length < 1) {
+      Alert.alert('Não esqueça de comentar!');
+      return;
+    }
     setModalVisible(false);
     console.log('driver data');
     console.log(driverData);
@@ -31,8 +37,48 @@ function DriverProfile(props) {
         type: "success",
       });
     }
-    
+
+    const res = await api.post('/rate', {
+      "driver_id": driverData.id,
+      commentRate
+    });
+
   }
+
+
+  async function fetchCommentRate() {
+    const res = await api.post('/user/rate', {
+      driver_id: driverData.id
+    })
+
+    res.data.response.sort(function (a, b) {
+      return new Date(b.id) - new Date(a.id);
+    });
+    setComments(res.data.response);
+  }
+
+
+  useEffect(() => {
+    props.navigation.addListener('focus', () => {
+      fetchCommentRate();
+    });
+
+  }, [props.navigation]);
+
+
+  function handleCommentRate(e) {
+    setCommentRate(e);
+  }
+
+
+  const renderItem = ({ item }) => (
+    <View style={styles.viewComment}>
+      <View style={styles.commentRateCard}>
+        <Text style={styles.commentStyle}>{item.comment}</Text>
+        <Icon name="comments-o" size={20} color="#FA960F" />
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -49,8 +95,9 @@ function DriverProfile(props) {
             maxStars={5}
             rating={driverData.number_stars}
             starSize={18}
+            halfStarEnabled
             fullStarColor={'#FA960F'}
-            selectedStar={(rating) => {}}
+            selectedStar={(rating) => { }}
           />
         </View>
         <View style={styles.contactView}>
@@ -83,7 +130,13 @@ function DriverProfile(props) {
           </TouchableOpacity>
         </View>
       </View>
-
+      <FlatList
+        data={comments}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
       <Modal
         animationType="slide"
         transparent={true}
@@ -96,14 +149,28 @@ function DriverProfile(props) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.rateView}>
-              <Text style={styles.modalText}>Avalie o seu cliente</Text>
+              <Text style={styles.modalText}>Avalie o seu motorista</Text>
               <StarRating
                 disabled={false}
                 maxStars={5}
                 rating={number_stars}
                 starSize={40}
+                halfStarEnabled
                 fullStarColor={'#FA960F'}
                 selectedStar={(rating) => setNumberStars(rating)}
+              />
+            </View>
+            <View>
+              <Text style={styles.commentRate}>{`${commentRate.length}/70`}</Text>
+              <TextInput
+                numberOfLines={3}
+                placeholder='Deixe um comentário aqui'
+                multiline
+                textAlign='center'
+                underlineColorAndroid='#000'
+                maxLength={70}
+                onChangeText={(e) => handleCommentRate(e)}
+                style={{ width: 200 }}
               />
             </View>
             <TouchableHighlight
