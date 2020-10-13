@@ -26,6 +26,8 @@ function Request(props) {
 
   async function loadDriverInfo() {
     const response = await api.post('/driver', { driver_id: ride.driver_id })
+    console.log(response.data.response[0].latitude);
+    console.log(response.data.response[0].longitude);
     if (response?.data?.messageCode === '200') {
       setDriverData(response.data.response[0])
     }
@@ -82,6 +84,22 @@ function Request(props) {
             >
             </Marker>
             <Marker
+              title='Motorista está aqui'
+              isPreselected
+              onPress={e => console.log(e.nativeEvent)}
+              draggable
+              coordinate={{
+                "latitude": parseFloat(driverData?.latitude)
+                  ? parseFloat(driverData?.latitude)
+                  : -22.36,
+                "longitude": parseFloat(driverData?.longitude)
+                  ? parseFloat(driverData?.longitude)
+                  : -47.52
+              }}
+
+            >
+            </Marker>
+            <Marker
               title='ponto de entrega'
               isPreselected={true}
               coordinate={{ "latitude": parseFloat(ride.toLatitude), "longitude": parseFloat(ride.toLongitude) }}
@@ -133,7 +151,7 @@ function Request(props) {
                   </View>
                 </TouchableOpacity>
               </> :
-              <View style={styles.noAnswerView}> 
+              <View style={styles.noAnswerView}>
                 <Text style={styles.noAnswer}>Ninguém aceitou fazer sua entrega ainda :(</Text>
               </View>
           }
