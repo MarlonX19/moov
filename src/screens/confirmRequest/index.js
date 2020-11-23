@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Image, Modal, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Image, Modal, Alert, TouchableHighlight } from 'react-native';
 import moment from 'moment';
 import {
   DotIndicator,
@@ -28,39 +28,44 @@ function ConfirmRequest(props) {
 
 
   async function handleSearch() {
-    let now = moment().valueOf().toString();
 
-    socket.emit('continue', {
-      user, value, fromTown, toTown,
-      fromLatitude, fromLongitude, toLatitude,
-      toLongitude, observation, date: now
-    })
+    if (value && observation) {
+      let now = moment().valueOf().toString();
 
-    setModalVisible(true);
+      socket.emit('continue', {
+        user, value, fromTown, toTown,
+        fromLatitude, fromLongitude, toLatitude,
+        toLongitude, observation, date: now
+      })
 
-    const response = await api.post('/delivery', {
-      accepted: false,
-      delivered: false,
-      value: value,
-      observation: observation,
-      fromLatitude: fromLatitude,
-      fromLongitude: fromLongitude,
-      toLatitude: toLatitude,
-      toLongitude: toLongitude,
-      fromTown: fromTown,
-      toTown: toTown,
-      delivered_at: null,
-      date: now,
-      driver_id: null,
-      user_id: user.id,
-    })
+      setModalVisible(true);
 
-    console.log(response);
+      const response = await api.post('/delivery', {
+        accepted: false,
+        delivered: false,
+        value: value,
+        observation: observation,
+        fromLatitude: fromLatitude,
+        fromLongitude: fromLongitude,
+        toLatitude: toLatitude,
+        toLongitude: toLongitude,
+        fromTown: fromTown,
+        toTown: toTown,
+        delivered_at: null,
+        date: now,
+        driver_id: null,
+        user_id: user.id,
+      })
 
-    setTimeout(() => {
-      setModalVisible(false);
-      props.navigation.navigate('Historico');
-    }, 3000);
+      console.log(response);
+
+      setTimeout(() => {
+        setModalVisible(false);
+        props.navigation.navigate('Historico');
+      }, 3000);
+    } else {
+      Alert.alert('Preencha os campos de valor e observação')
+    }
 
   }
 
